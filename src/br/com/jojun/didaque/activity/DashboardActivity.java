@@ -105,16 +105,16 @@ public class DashboardActivity extends ActionBarActivity {
 	/** Swaps fragments in the main content view */
 	private void selectItem(int position) {
 	    // Create a new fragment and specify the planet to show based on position
-	    Fragment fragment = new ApostilasFragment();
-	    Bundle args = new Bundle();
+//	    Fragment fragment = new ApostilasFragment();
+//	    Bundle args = new Bundle();
 //	    args.putInt(ApostilasFragment.ARG_PLANET_NUMBER, position);
-	    fragment.setArguments(args);
-
-	    // Insert the fragment by replacing any existing fragment
-	    FragmentManager fragmentManager = getSupportFragmentManager();
-	    fragmentManager.beginTransaction()
-	                   .replace(R.id.content_frame, fragment)
-	                   .commit();
+//	    fragment.setArguments(args);
+//
+//	    // Insert the fragment by replacing any existing fragment
+//	    FragmentManager fragmentManager = getSupportFragmentManager();
+//	    fragmentManager.beginTransaction()
+//	                   .replace(R.id.content_frame, fragment)
+//	                   .commit();
 
 	    // Highlight the selected item, update the title, and close the drawer
 	    mDrawerList.setItemChecked(position, true);
