@@ -3,9 +3,9 @@ package br.com.jojun.didaque.activity;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import br.com.jojun.didaque.R;
-import br.com.jojun.didaque.fragment.ApostilasFragment;
 
 public class DashboardActivity extends ActionBarActivity {
 	private String[] apostilas;
@@ -31,6 +30,32 @@ public class DashboardActivity extends ActionBarActivity {
 		
 		mDrawerTitle = "Apostilas";
 		mTitle = "Didaque";
+		
+	    // Specify that tabs should be displayed in the action bar.
+	    getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+	    
+	 // Create a tab listener that is called when the user changes tabs.
+	    ActionBar.TabListener tabListener = new ActionBar.TabListener() {
+	        public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+	            // show the given tab
+	        }
+
+	        public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+	            // hide the given tab
+	        }
+
+	        public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+	            // probably ignore this event
+	        }
+	    };
+	    
+	    // Add 3 tabs, specifying the tab's text and TabListener
+	    for (int i = 0; i < 3; i++) {
+	    	getSupportActionBar().addTab(
+	    			getSupportActionBar().newTab()
+	                        .setText("Tab " + (i + 1))
+	                        .setTabListener(tabListener));
+	    }
 		
 		apostilas = getResources().getStringArray(R.array.array_apostilas);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
