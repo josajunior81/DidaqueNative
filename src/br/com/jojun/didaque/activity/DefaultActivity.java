@@ -1,12 +1,16 @@
 package br.com.jojun.didaque.activity;
 
+import android.R.anim;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,49 +18,35 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import br.com.jojun.didaque.R;
+import br.com.jojun.didaque.bean.Apostila;
+import br.com.jojun.didaque.fragment.LicaoFragment;
+import br.com.jojun.didaque.fragment.TextosFragment;
 
 public class DefaultActivity extends ActionBarActivity {
-	private String[] apostilas;
-    private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;
-    private CharSequence mTitle;
-    private CharSequence mDrawerTitle;
-    private ActionBarDrawerToggle mDrawerToggle;
+	protected String[] apostilas;
+    protected DrawerLayout mDrawerLayout;
+    protected ListView mDrawerList;
+    protected CharSequence mTitle;
+    protected CharSequence mDrawerTitle;
+    protected ActionBarDrawerToggle mDrawerToggle;
+    protected boolean showTabBar = false;
+    private int apostila;
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_dashboard);
 		
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+		
+//		Fragment fragmentTexto = new TextosFragment();
+//		fragmentTransaction.add(R.id.fragment_texto, fragmentTexto);
+//		fragmentTransaction.commit();
+		
 		mDrawerTitle = "Apostilas";
 		mTitle = "Didaque";
-		
-	    // Specify that tabs should be displayed in the action bar.
-	    getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-	    
-	 // Create a tab listener that is called when the user changes tabs.
-	    ActionBar.TabListener tabListener = new ActionBar.TabListener() {
-	        public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-	            // show the given tab
-	        }
-
-	        public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
-	            // hide the given tab
-	        }
-
-	        public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-	            // probably ignore this event
-	        }
-	    };
-	    
-	    // Add 3 tabs, specifying the tab's text and TabListener
-	    for (int i = 0; i < 3; i++) {
-	    	getSupportActionBar().addTab(
-	    			getSupportActionBar().newTab()
-	                        .setText("Tab " + (i + 1))
-	                        .setTabListener(tabListener));
-	    }
-		
+				
 		apostilas = getResources().getStringArray(R.array.array_apostilas);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
@@ -87,6 +77,45 @@ public class DefaultActivity extends ActionBarActivity {
         
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+	}
+	
+	protected void isShowTabBar(){
+		if(showTabBar) {
+		    // Specify that tabs should be displayed in the action bar.
+		    getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		    
+		 // Create a tab listener that is called when the user changes tabs.
+		    ActionBar.TabListener tabListener = new ActionBar.TabListener() {
+		        public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+		    		LicaoFragment fragment = new LicaoFragment();
+
+		    		fragment.setNumeroApostila(apostila);
+		    		fragment.setNumeroLicao((tab.getPosition()+1));
+		    		ft.replace(R.id.content_frame, fragment);
+//		    	    ft.commit();
+		        }
+	
+		        public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+		            // hide the given tab
+		        }
+	
+		        public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+		            // probably ignore this event
+		        }
+		    };
+		    
+		    // Add 3 tabs, specifying the tab's text and TabListener
+		    for (int i = 0; i < Apostila.getQuantidadeLicoes(apostila); i++) {
+		    	getSupportActionBar().addTab(
+		    			getSupportActionBar().newTab()
+		                        .setText(" - " + (i + 1) + " - ")
+		                        .setTabListener(tabListener));
+		    }
+		}
+		else{
+			getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+		}
+
 	}
 	
     @Override
@@ -120,7 +149,7 @@ public class DefaultActivity extends ActionBarActivity {
         return super.onPrepareOptionsMenu(menu);
     }
 	
-	private class DrawerItemClickListener implements ListView.OnItemClickListener {
+	protected class DrawerItemClickListener implements ListView.OnItemClickListener {
 	    @Override
 	    public void onItemClick(AdapterView parent, View view, int position, long id) {
 	        selectItem(position);
@@ -128,20 +157,35 @@ public class DefaultActivity extends ActionBarActivity {
 	}
 	
 	/** Swaps fragments in the main content view */
-	private void selectItem(int position) {
-	    // Create a new fragment and specify the planet to show based on position
-//	    Fragment fragment = new ApostilasFragment();
-//	    Bundle args = new Bundle();
-//	    args.putInt(ApostilasFragment.ARG_PLANET_NUMBER, position);
-//	    fragment.setArguments(args);
+	protected void selectItem(int position) {
+
+		if(!showTabBar){
+		    FragmentManager fragmentManager = getSupportFragmentManager();
+		    FragmentTransaction transaction = fragmentManager.beginTransaction();
+			Fragment frag = (Fragment)fragmentManager.findFragmentById(R.id.fragment_texto);
+			transaction.addToBackStack(null);
+			transaction.hide(frag);
+			transaction.commit();
+		}
+		
+		if(position > 0)
+			showTabBar = true;
+		else
+			showTabBar = false;
+		apostila = position;
+		isShowTabBar();
+		
+//		LicaoFragment fragment = new LicaoFragment();
+//	    FragmentTransaction transaction = fragmentManager.beginTransaction();
 //
-//	    // Insert the fragment by replacing any existing fragment
-//	    FragmentManager fragmentManager = getSupportFragmentManager();
-//	    fragmentManager.beginTransaction()
-//	                   .replace(R.id.content_frame, fragment)
-//	                   .commit();
+//		fragment.setNumeroApostila(position);
+//		fragment.setNumeroLicao(1);
+//		transaction.addToBackStack(null);
+//		transaction.replace(R.id.content_frame, fragment);
+//	    transaction.commit();
 
 	    // Highlight the selected item, update the title, and close the drawer
+		Log.i("DA", "p - "+position);
 	    mDrawerList.setItemChecked(position, true);
 	    setTitle(apostilas[position]);
 	    mDrawerLayout.closeDrawer(mDrawerList);
@@ -157,7 +201,7 @@ public class DefaultActivity extends ActionBarActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.dashboard, menu);
-		return true;
+		return false;
 	}
 
 }
