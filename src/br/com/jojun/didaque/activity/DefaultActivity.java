@@ -128,11 +128,11 @@ public class DefaultActivity extends ActionBarActivity {
 		 // Create a tab listener that is called when the user changes tabs.
 		    ActionBar.TabListener tabListener = new ActionBar.TabListener() {
 		        public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-//		        	mViewPager.setCurrentItem(tab.getPosition());
+		        	mViewPager.setCurrentItem(tab.getPosition());
 //		        	
 					fragmentAtual = new LicaoFragment();
-		        	fragmentAtual.setNumeroApostila(apostila);
-		        	fragmentAtual.setNumeroLicao((tab.getPosition()+1));
+//		        	fragmentAtual.setNumeroApostila(apostila);
+//		        	fragmentAtual.setNumeroLicao((tab.getPosition()+1));
 		    		ft.replace(R.id.content_frame, fragmentAtual);
 		    	}
 	
