@@ -264,7 +264,7 @@ int id homeAsUp 0x7f050005
 int id icon 0x7f050028
 int id ifRoom 0x7f05000a
 int id image 0x7f050025
-int id left_drawer 0x7f050045
+int id left_drawer 0x7f050046
 int id left_icon 0x7f050031
 int id listMode 0x7f050001
 int id list_item 0x7f050027
@@ -272,7 +272,7 @@ int id middle 0x7f050012
 int id never 0x7f050009
 int id none 0x7f050010
 int id normal 0x7f050000
-int id pager 0x7f05004a
+int id pager 0x7f050045
 int id pager_title_strip 0x7f05004b
 int id progress_circular 0x7f050034
 int id progress_horizontal 0x7f050035
@@ -299,10 +299,10 @@ int id tabMode 0x7f050002
 int id title 0x7f050029
 int id title_container 0x7f050030
 int id top_action_bar 0x7f05001e
-int id tv_licao_catequese 0x7f050049
-int id tv_licao_titulo 0x7f050048
-int id tv_textos_licao 0x7f050046
-int id tv_textos_texto 0x7f050047
+int id tv_licao_catequese 0x7f05004a
+int id tv_licao_titulo 0x7f050049
+int id tv_textos_licao 0x7f050047
+int id tv_textos_texto 0x7f050048
 int id up 0x7f05001f
 int id useLogo 0x7f050003
 int id withText 0x7f05000c

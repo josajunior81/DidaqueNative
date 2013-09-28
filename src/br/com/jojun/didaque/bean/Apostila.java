@@ -15,21 +15,24 @@ public class Apostila {
 		SQLiteDatabase db = DBHelper.getInstance().getReadableDatabase();
 		Cursor cursor = db.query("Apostila ",
                 new String[] { "tituloLicao","catequese" }, "numeroLicao = "+numeroLicao+" AND numeroApostila = "+numeroApostila, null, null, null, null);
-		Log.i("TA", ""+cursor.getCount());
-		cursor.moveToFirst();
-		Apostila a = new Apostila();
-		a.tituloLicao = cursor.getString(0);
-		a.catequese = cursor.getString(1);
-		cursor.close();
-		db.close();
-		return a;
+		Log.i("A", ""+cursor.getCount());
+		if(!cursor.moveToFirst())
+			return null;
+		else {
+			Apostila a = new Apostila();
+			a.tituloLicao = cursor.getString(0);
+			a.catequese = cursor.getString(1);
+			cursor.close();
+			db.close();
+			return a;
+		}
 	}
 	
 	public static int getQuantidadeLicoes(int apostila) {
 		SQLiteDatabase db = DBHelper.getInstance().getReadableDatabase();
 		Cursor cursor = db.query("Apostila ",
                 new String[] { "tituloLicao","catequese" }, " numeroApostila = "+apostila, null, null, null, null);
-		Log.i("TA", ""+cursor.getCount());
+		Log.i("A", ""+cursor.getCount());
 		int quantidade = cursor.getCount();
 		cursor.close();
 		db.close();

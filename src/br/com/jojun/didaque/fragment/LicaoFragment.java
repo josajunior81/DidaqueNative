@@ -30,9 +30,10 @@ public class LicaoFragment extends Fragment {
 		
 		tvTitulo = (TextView)view.findViewById(R.id.tv_licao_titulo);
 		tvCatequese = (TextView)view.findViewById(R.id.tv_licao_catequese);
-		
-		tvTitulo.setText(apostila.tituloLicao);
-		tvCatequese.setText(Html.fromHtml(apostila.catequese));
+		if(apostila != null) {
+			tvTitulo.setText(apostila.tituloLicao);
+			tvCatequese.setText(Html.fromHtml(apostila.catequese));
+		}
     }
 
 	public int getNumeroApostila() {

@@ -1019,7 +1019,7 @@ containing a value of this type.
         public static final int icon=0x7f050028;
         public static final int ifRoom=0x7f05000a;
         public static final int image=0x7f050025;
-        public static final int left_drawer=0x7f050045;
+        public static final int left_drawer=0x7f050046;
         public static final int left_icon=0x7f050031;
         public static final int listMode=0x7f050001;
         public static final int list_item=0x7f050027;
@@ -1027,7 +1027,7 @@ containing a value of this type.
         public static final int never=0x7f050009;
         public static final int none=0x7f050010;
         public static final int normal=0x7f050000;
-        public static final int pager=0x7f05004a;
+        public static final int pager=0x7f050045;
         public static final int pager_title_strip=0x7f05004b;
         public static final int progress_circular=0x7f050034;
         public static final int progress_horizontal=0x7f050035;
@@ -1054,10 +1054,10 @@ containing a value of this type.
         public static final int title=0x7f050029;
         public static final int title_container=0x7f050030;
         public static final int top_action_bar=0x7f05001e;
-        public static final int tv_licao_catequese=0x7f050049;
-        public static final int tv_licao_titulo=0x7f050048;
-        public static final int tv_textos_licao=0x7f050046;
-        public static final int tv_textos_texto=0x7f050047;
+        public static final int tv_licao_catequese=0x7f05004a;
+        public static final int tv_licao_titulo=0x7f050049;
+        public static final int tv_textos_licao=0x7f050047;
+        public static final int tv_textos_texto=0x7f050048;
         public static final int up=0x7f05001f;
         public static final int useLogo=0x7f050003;
         public static final int withText=0x7f05000c;
