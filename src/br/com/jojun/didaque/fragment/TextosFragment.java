@@ -25,9 +25,13 @@ public class TextosFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
     	// TODO Auto-generated method stub
     	super.onViewCreated(view, savedInstanceState);
+    	setTextoAleatorio();
+    }
+    
+    public void setTextoAleatorio(){
 		textoAleatorio = TextoAleatorio.getTexoAleatoriamente();
-		tvTexto = (TextView)view.findViewById(R.id.tv_textos_texto);
-		tvLicao = (TextView)view.findViewById(R.id.tv_textos_licao);
+		tvTexto = (TextView)getView().findViewById(R.id.tv_textos_texto);
+		tvLicao = (TextView)getView().findViewById(R.id.tv_textos_licao);
 		
 		tvTexto.setText(textoAleatorio.texto);
 		tvLicao.setText(textoAleatorio.licao);

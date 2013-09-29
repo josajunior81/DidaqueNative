@@ -6,14 +6,12 @@ import java.util.List;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +22,7 @@ import br.com.jojun.didaque.R;
 import br.com.jojun.didaque.adapter.LicaoPagerAdapter;
 import br.com.jojun.didaque.bean.Apostila;
 import br.com.jojun.didaque.fragment.LicaoFragment;
+import br.com.jojun.didaque.fragment.TextosFragment;
 
 public class DefaultActivity extends ActionBarActivity {
 	protected String[] apostilas;
@@ -32,14 +31,14 @@ public class DefaultActivity extends ActionBarActivity {
     protected CharSequence mTitle;
     protected CharSequence mDrawerTitle;
     protected ActionBarDrawerToggle mDrawerToggle;
-    protected boolean showTabBar = false;
+    protected boolean telaInicial;
     private int apostila;
     protected ViewPager mViewPager;
     protected List<LicaoFragment> fragments;
     protected LicaoFragment fragmentAtual;
     protected FragmentManager fragmentManager = getSupportFragmentManager();
     protected FragmentTransaction transaction;
-    private int licao;
+    private LicaoPagerAdapter pagerAdapter;
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +47,9 @@ public class DefaultActivity extends ActionBarActivity {
 
 		mDrawerTitle = "Apostilas";
 		mTitle = "Didaque";
-				
+		
+		telaInicial = true;
+		
 		apostilas = getResources().getStringArray(R.array.array_apostilas);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
@@ -82,7 +83,7 @@ public class DefaultActivity extends ActionBarActivity {
 	}
 	
 	protected void isShowTabBar(){
-		if(showTabBar) {
+		if(!telaInicial) {
 		    
 			// Specify that tabs should be displayed in the action bar.
 		    getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -97,7 +98,7 @@ public class DefaultActivity extends ActionBarActivity {
 	        	fragments.add(fragment);
 		    }
 		    
-		    LicaoPagerAdapter pagerAdapter = new LicaoPagerAdapter(fragmentManager, fragments);
+		    pagerAdapter = new LicaoPagerAdapter(fragmentManager, fragments);
 		    pagerAdapter.notifyDataSetChanged();
 			mViewPager = (ViewPager) findViewById(R.id.pager);
 			mViewPager.setAdapter(pagerAdapter);
@@ -105,23 +106,7 @@ public class DefaultActivity extends ActionBarActivity {
 		            new ViewPager.SimpleOnPageChangeListener() {
 		                @Override
 		                public void onPageSelected(final int position) {
-		                    // When swiping between pages, select the
-		                    // corresponding tab.
-		                	Log.i("DA", "Tentando mudar página "+position);
 		                	getSupportActionBar().setSelectedNavigationItem(position);
-		                }
-		               		                
-		                @Override
-		                public void onPageScrolled(int position,
-		                		float positionOffset, int positionOffsetPixels) {
-		                	// TODO Auto-generated method stub
-		                	super.onPageScrolled(position, positionOffset, positionOffsetPixels);
-		                	Log.i("DA", "Swipping "+position);
-
-		                	transaction = fragmentManager.beginTransaction();
-				        	transaction.hide(fragmentAtual);
-				        	transaction.addToBackStack(null);
-				    		transaction.commit();
 		                }
 		            });
 
@@ -131,8 +116,6 @@ public class DefaultActivity extends ActionBarActivity {
 		        	mViewPager.setCurrentItem(tab.getPosition());
 //		        	
 					fragmentAtual = new LicaoFragment();
-//		        	fragmentAtual.setNumeroApostila(apostila);
-//		        	fragmentAtual.setNumeroLicao((tab.getPosition()+1));
 		    		ft.replace(R.id.content_frame, fragmentAtual);
 		    	}
 	
@@ -199,34 +182,33 @@ public class DefaultActivity extends ActionBarActivity {
 	
 	/** Swaps fragments in the main content view */
 	protected void selectItem(int position) {
-
-		if(!showTabBar){
+		
+		if(position > 0) {
+			telaInicial = false;
+			apostila = position;
+			
 			transaction = fragmentManager.beginTransaction();
-			Fragment frag = (Fragment)fragmentManager.findFragmentById(R.id.fragment_texto);
+			TextosFragment frag = (TextosFragment)fragmentManager.findFragmentById(R.id.fragment_texto);
 			transaction.addToBackStack(null);
 			transaction.hide(frag);
 			transaction.commit();
-		}
-		
-		if(position > 0)
-			showTabBar = true;
-		else
-			showTabBar = false;
-		apostila = position;
-		isShowTabBar();
-		
-//		LicaoFragment fragment = new LicaoFragment();
-//	    FragmentTransaction transaction = fragmentManager.beginTransaction();
-//
-//		fragment.setNumeroApostila(position);
-//		fragment.setNumeroLicao(1);
-//		transaction.addToBackStack(null);
-//		transaction.replace(R.id.content_frame, fragment);
-//	    transaction.commit();
 
-	    // Highlight the selected item, update the title, and close the drawer
-		Log.i("DA", "p - "+position);
-	    mDrawerList.setItemChecked(position, true);
+		}
+		else if(!telaInicial) {
+			telaInicial = true;
+			pagerAdapter.setListFragments(new ArrayList<LicaoFragment>());
+			pagerAdapter.notifyDataSetChanged();
+			mViewPager.setAdapter(pagerAdapter);
+			transaction = fragmentManager.beginTransaction();
+			TextosFragment frag = (TextosFragment)fragmentManager.findFragmentById(R.id.fragment_texto);
+			frag.setTextoAleatorio();
+			transaction.addToBackStack(null);
+			transaction.show(frag);
+			transaction.commit();
+		}
+		isShowTabBar();
+
+		mDrawerList.setItemChecked(position, true);
 	    setTitle(apostilas[position]);
 	    mDrawerLayout.closeDrawer(mDrawerList);
 	}
@@ -242,6 +224,21 @@ public class DefaultActivity extends ActionBarActivity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.dashboard, menu);
 		return false;
+	}
+	
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
+		if(telaInicial)
+			finish();
+		else {
+			pagerAdapter.setListFragments(new ArrayList<LicaoFragment>());
+			pagerAdapter.notifyDataSetChanged();
+			mViewPager.setAdapter(pagerAdapter);
+			telaInicial = true;
+			isShowTabBar();
+		}
 	}
 
 }

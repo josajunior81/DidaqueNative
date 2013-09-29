@@ -2,12 +2,10 @@ package br.com.jojun.didaque.adapter;
 
 import java.util.List;
 
-import br.com.jojun.didaque.fragment.LicaoFragment;
-
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
+import br.com.jojun.didaque.fragment.LicaoFragment;
 
 public class LicaoPagerAdapter extends FragmentPagerAdapter {
 
@@ -15,19 +13,27 @@ public class LicaoPagerAdapter extends FragmentPagerAdapter {
 	
 	public LicaoPagerAdapter(FragmentManager fm, List<LicaoFragment> fragments) {
 		super(fm);
-		listFragments = fragments;
+		setListFragments(fragments);
 	}
 
 	@Override
 	public LicaoFragment getItem(int position) {
 		Log.i("PF", "veio no get item");
-		return listFragments.get(position);
+		return getListFragments().get(position);
 	}
 
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return listFragments.size();
+		return getListFragments().size();
+	}
+
+	public List<LicaoFragment> getListFragments() {
+		return listFragments;
+	}
+
+	public void setListFragments(List<LicaoFragment> listFragments) {
+		this.listFragments = listFragments;
 	}
 
 }
