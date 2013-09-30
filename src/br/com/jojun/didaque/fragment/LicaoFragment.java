@@ -33,7 +33,7 @@ public class LicaoFragment extends Fragment {
 		if(apostila != null) {
 			tvTitulo.setText(apostila.tituloLicao);
 			tvCatequese.setText(Html.fromHtml(apostila.catequese));
-		}
+		}	
     }
 
 	public int getNumeroApostila() {

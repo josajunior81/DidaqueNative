@@ -12,6 +12,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.text.style.ParagraphStyle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -49,6 +50,18 @@ public class DefaultActivity extends ActionBarActivity {
 		mTitle = "Didaque";
 		
 		telaInicial = true;
+		
+	    pagerAdapter = new LicaoPagerAdapter(fragmentManager, new ArrayList<LicaoFragment>());
+		mViewPager = (ViewPager) findViewById(R.id.pager);
+		pagerAdapter.notifyDataSetChanged();
+		mViewPager.setAdapter(pagerAdapter);
+	    mViewPager.setOnPageChangeListener(
+	            new ViewPager.SimpleOnPageChangeListener() {
+	                @Override
+	                public void onPageSelected(final int position) {
+	                	getSupportActionBar().setSelectedNavigationItem(position);
+	                }
+	            });
 		
 		apostilas = getResources().getStringArray(R.array.array_apostilas);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -91,24 +104,16 @@ public class DefaultActivity extends ActionBarActivity {
 		    fragments = new ArrayList<LicaoFragment>();
 
 		    for (int i = 0; i < Apostila.getQuantidadeLicoes(apostila); i++) {
-	        	LicaoFragment fragment = new LicaoFragment();
-	        	fragment.setRetainInstance(true);
+	        	LicaoFragment fragment = (LicaoFragment) LicaoFragment.instantiate(this, LicaoFragment.class.getName());
 	    		fragment.setNumeroApostila(apostila);
 	    		fragment.setNumeroLicao((i+1));
+//	    		fragment.initLicao();
 	        	fragments.add(fragment);
 		    }
-		    
-		    pagerAdapter = new LicaoPagerAdapter(fragmentManager, fragments);
+
+		    pagerAdapter.setListFragments(fragments);
 		    pagerAdapter.notifyDataSetChanged();
-			mViewPager = (ViewPager) findViewById(R.id.pager);
 			mViewPager.setAdapter(pagerAdapter);
-		    mViewPager.setOnPageChangeListener(
-		            new ViewPager.SimpleOnPageChangeListener() {
-		                @Override
-		                public void onPageSelected(final int position) {
-		                	getSupportActionBar().setSelectedNavigationItem(position);
-		                }
-		            });
 
 		 // Create a tab listener that is called when the user changes tabs.
 		    ActionBar.TabListener tabListener = new ActionBar.TabListener() {
