@@ -128,6 +128,8 @@ public class DefaultActivity extends ActionBarActivity {
 		        }
 		    };
 		    
+		    getSupportActionBar().removeAllTabs();
+		    
 		    // Add 3 tabs, specifying the tab's text and TabListener
 		    for (int i = 0; i < Apostila.getQuantidadeLicoes(apostila); i++) {
 		    	getSupportActionBar().addTab(
