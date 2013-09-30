@@ -174,7 +174,8 @@ public class DefaultActivity extends ActionBarActivity {
     }
 	
 	protected class DrawerItemClickListener implements ListView.OnItemClickListener {
-	    @Override
+	    @SuppressWarnings("rawtypes")
+		@Override
 	    public void onItemClick(AdapterView parent, View view, int position, long id) {
 	        selectItem(position);
 	    }
