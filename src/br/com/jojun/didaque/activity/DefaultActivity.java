@@ -3,6 +3,7 @@ package br.com.jojun.didaque.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -12,13 +13,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.text.style.ParagraphStyle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 import br.com.jojun.didaque.R;
 import br.com.jojun.didaque.adapter.LicaoPagerAdapter;
 import br.com.jojun.didaque.bean.Apostila;
@@ -32,8 +34,9 @@ public class DefaultActivity extends ActionBarActivity {
     protected CharSequence mTitle;
     protected CharSequence mDrawerTitle;
     protected ActionBarDrawerToggle mDrawerToggle;
-    protected boolean telaInicial;
+    protected boolean telaInicial= true;
     private int apostila;
+    private int licao;
     protected ViewPager mViewPager;
     protected List<LicaoFragment> fragments;
     protected LicaoFragment fragmentAtual;
@@ -49,7 +52,10 @@ public class DefaultActivity extends ActionBarActivity {
 		mDrawerTitle = "Apostilas";
 		mTitle = "Didaque";
 		
-		telaInicial = true;
+		if(savedInstanceState != null){
+			telaInicial = savedInstanceState.getBoolean("tela");
+			Toast.makeText(this, "Pegou o valor de telaInicial", Toast.LENGTH_SHORT).show();
+		} 
 		
 	    pagerAdapter = new LicaoPagerAdapter(fragmentManager, new ArrayList<LicaoFragment>());
 		mViewPager = (ViewPager) findViewById(R.id.pager);
@@ -62,7 +68,7 @@ public class DefaultActivity extends ActionBarActivity {
 	                	getSupportActionBar().setSelectedNavigationItem(position);
 	                }
 	            });
-		
+	    
 		apostilas = getResources().getStringArray(R.array.array_apostilas);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
@@ -93,6 +99,26 @@ public class DefaultActivity extends ActionBarActivity {
         
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+		
+        if(!telaInicial) {
+        	apostila = savedInstanceState.getInt("apostila");
+        	licao = savedInstanceState.getInt("licao");
+        	selectItem(apostila);
+        }
+        
+	}
+	
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		// TODO Auto-generated method stub
+		super.onSaveInstanceState(outState);
+		Intent i = getIntent();
+		outState.putBoolean("tela", telaInicial);
+		outState.putInt("apostila", apostila);
+		outState.putInt("licao", licao);
+		
+		Log.i("DA", "TelaInicial: "+telaInicial);
+		
 	}
 	
 	protected void isShowTabBar(){
@@ -119,6 +145,7 @@ public class DefaultActivity extends ActionBarActivity {
 		    ActionBar.TabListener tabListener = new ActionBar.TabListener() {
 		        public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
 		        	mViewPager.setCurrentItem(tab.getPosition());
+		        	licao = tab.getPosition();
 //		        	
 					fragmentAtual = new LicaoFragment();
 		    		ft.replace(R.id.content_frame, fragmentAtual);
