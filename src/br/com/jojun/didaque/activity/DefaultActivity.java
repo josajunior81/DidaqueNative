@@ -3,7 +3,6 @@ package br.com.jojun.didaque.activity;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -20,7 +19,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 import br.com.jojun.didaque.R;
 import br.com.jojun.didaque.adapter.LicaoPagerAdapter;
 import br.com.jojun.didaque.bean.Apostila;
@@ -54,7 +52,6 @@ public class DefaultActivity extends ActionBarActivity {
 		
 		if(savedInstanceState != null){
 			telaInicial = savedInstanceState.getBoolean("tela");
-			Toast.makeText(this, "Pegou o valor de telaInicial", Toast.LENGTH_SHORT).show();
 		} 
 		
 	    pagerAdapter = new LicaoPagerAdapter(fragmentManager, new ArrayList<LicaoFragment>());
@@ -111,22 +108,21 @@ public class DefaultActivity extends ActionBarActivity {
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		// TODO Auto-generated method stub
-		super.onSaveInstanceState(outState);
-		Intent i = getIntent();
+//		super.onSaveInstanceState(outState);
 		outState.putBoolean("tela", telaInicial);
 		outState.putInt("apostila", apostila);
 		outState.putInt("licao", licao);
 		
-		Log.i("DA", "TelaInicial: "+telaInicial);
+//		Log.i("DA", "TelaInicial: "+telaInicial);
 		
 	}
 	
 	protected void isShowTabBar(){
 		if(!telaInicial) {
-		    
 			// Specify that tabs should be displayed in the action bar.
-		    getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-		    
+			if( getSupportActionBar().getNavigationMode() != ActionBar.NAVIGATION_MODE_TABS)
+				getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		   
 		    fragments = new ArrayList<LicaoFragment>();
 
 		    for (int i = 0; i < Apostila.getQuantidadeLicoes(apostila); i++) {
@@ -164,10 +160,10 @@ public class DefaultActivity extends ActionBarActivity {
 		    
 		    // Add 3 tabs, specifying the tab's text and TabListener
 		    for (int i = 0; i < Apostila.getQuantidadeLicoes(apostila); i++) {
-		    	getSupportActionBar().addTab(
-		    			getSupportActionBar().newTab()
+		    	
+		    	getSupportActionBar().addTab(getSupportActionBar().newTab()
 		                        .setText(" - " + (i + 1) + " - ")
-		                        .setTabListener(tabListener));
+		                        .setTabListener(tabListener), i, ((i)==licao?true : false));
 		    }
 		}
 		else{
@@ -219,6 +215,8 @@ public class DefaultActivity extends ActionBarActivity {
 	protected void selectItem(int position) {
 		
 		if(position > 0) {
+			if(apostila != position)
+				licao = 0;
 			telaInicial = false;
 			apostila = position;
 			

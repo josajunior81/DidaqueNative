@@ -2,6 +2,7 @@ package br.com.jojun.didaque.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +34,7 @@ public class TextosFragment extends Fragment {
 		tvTexto = (TextView)getView().findViewById(R.id.tv_textos_texto);
 		tvLicao = (TextView)getView().findViewById(R.id.tv_textos_licao);
 		
-		tvTexto.setText(textoAleatorio.texto);
+		tvTexto.setText(Html.fromHtml(textoAleatorio.texto));
 		tvLicao.setText(textoAleatorio.licao);
     }
 }

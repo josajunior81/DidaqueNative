@@ -2,7 +2,6 @@ package br.com.jojun.didaque.bean;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 import br.com.jojun.didaque.util.DBHelper;
 
 public class Apostila {
@@ -15,7 +14,6 @@ public class Apostila {
 		SQLiteDatabase db = DBHelper.getInstance().getReadableDatabase();
 		Cursor cursor = db.query("Apostila ",
                 new String[] { "tituloLicao","catequese" }, "numeroLicao = "+numeroLicao+" AND numeroApostila = "+numeroApostila, null, null, null, null);
-		Log.i("A", ""+cursor.getCount());
 		if(!cursor.moveToFirst())
 			return null;
 		else {
@@ -32,7 +30,6 @@ public class Apostila {
 		SQLiteDatabase db = DBHelper.getInstance().getReadableDatabase();
 		Cursor cursor = db.query("Apostila ",
                 new String[] { "tituloLicao","catequese" }, " numeroApostila = "+apostila, null, null, null, null);
-		Log.i("A", ""+cursor.getCount());
 		int quantidade = cursor.getCount();
 		cursor.close();
 		db.close();
