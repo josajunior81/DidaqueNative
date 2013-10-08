@@ -1002,7 +1002,7 @@ containing a value of this type.
         public static final int action_mode_close_button=0x7f050022;
         public static final int action_settings=0x7f05004e;
         public static final int activity_chooser_view_content=0x7f050023;
-        public static final int ad=0x7f050047;
+        public static final int ad=0x7f050046;
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
         public static final int checkbox=0x7f05002b;
@@ -1023,7 +1023,7 @@ containing a value of this type.
         public static final int icon=0x7f050028;
         public static final int ifRoom=0x7f05000a;
         public static final int image=0x7f050025;
-        public static final int left_drawer=0x7f050046;
+        public static final int left_drawer=0x7f050048;
         public static final int left_icon=0x7f050031;
         public static final int listMode=0x7f050001;
         public static final int list_item=0x7f050027;
@@ -1053,7 +1053,7 @@ containing a value of this type.
         public static final int showHome=0x7f050004;
         public static final int showTitle=0x7f050006;
         public static final int split_action_bar=0x7f05001c;
-        public static final int status=0x7f050048;
+        public static final int status=0x7f050047;
         public static final int submit_area=0x7f05003f;
         public static final int tabMode=0x7f050002;
         public static final int title=0x7f050029;

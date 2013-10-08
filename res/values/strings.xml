@@ -6,7 +6,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="drawer_open">Abrir</string>
     <string name="drawer_close">Fechar</string>
-    <string name="admob_id">1180552025950359</string>
+    <string name="admob_id">ca-app-pub-1180552025950359/6609312226</string>
     <string name="error_receive_ad">Erro AdMob</string>
 
 </resources>
