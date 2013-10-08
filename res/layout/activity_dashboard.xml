@@ -26,7 +26,16 @@
             android:id="@+id/pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/ad" />
+            android:layout_above="@+id/divider" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_above="@+id/ad"
+            android:layout_marginBottom="2dp"
+            android:background="@android:color/darker_gray"
+            android:paddingBottom="5dp" />
 
         <com.google.ads.AdView
             android:id="@+id/ad"
@@ -35,8 +44,10 @@
             android:layout_alignParentBottom="true"
             android:gravity="center"
             googleads:adSize="BANNER"
-            googleads:testDevices="133439AA006AF22215BBBD6132CB4CD9"
-            googleads:adUnitId="@string/admob_id" />
+            googleads:adUnitId="@string/admob_id"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            />
 
         <TextView
             android:id="@+id/status"
