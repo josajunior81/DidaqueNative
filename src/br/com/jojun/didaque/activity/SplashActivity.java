@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.util.Calendar;
 
 import br.com.jojun.didaque.DidaqueApplication;
+import br.com.jojun.didaque.R;
 import br.com.jojun.didaque.util.DBHelper;
 import android.app.Activity;
 import android.content.Intent;
@@ -28,6 +29,7 @@ public class SplashActivity extends Activity implements Runnable{
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_splash);
 		
 		final Handler handler = new Handler();
 		

@@ -3,23 +3,32 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <!-- The main content view -->
-    <FrameLayout
-        android:id="@+id/content_frame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-	        <fragment android:name="br.com.jojun.didaque.fragment.TextosFragment"
-	            android:id="@+id/fragment_texto"
-	            android:layout_width="match_parent"
-	            android:layout_height="match_parent" />
-    </FrameLayout>
+    
+    <RelativeLayout >
+
     
     <android.support.v4.view.ViewPager
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
+    
+        <com.google.ads.AdView
+        xmlns:googleads="http://schemas.android.com/apk/lib/com.google.ads"
+        android:id="@+id/ad"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        googleads:adSize="BANNER"
+        googleads:adUnitId="@string/admob_id"
+        android:layout_alignParentBottom="true"
+         />
+    
+        <TextView android:id="@+id/status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+         android:layout_alignParentBottom="true"
+        />
+	</RelativeLayout>
     <!-- The navigation drawer -->
     <ListView android:id="@+id/left_drawer"
         android:layout_width="240dp"
@@ -29,4 +38,6 @@
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp"
         android:background="#111"/>
+
+    
 </android.support.v4.widget.DrawerLayout>

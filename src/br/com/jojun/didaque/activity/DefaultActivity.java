@@ -12,18 +12,24 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import br.com.jojun.didaque.R;
 import br.com.jojun.didaque.adapter.LicaoPagerAdapter;
 import br.com.jojun.didaque.bean.Apostila;
 import br.com.jojun.didaque.fragment.LicaoFragment;
 import br.com.jojun.didaque.fragment.TextosFragment;
+
+import com.google.ads.Ad;
+import com.google.ads.AdListener;
+import com.google.ads.AdRequest;
+import com.google.ads.AdRequest.ErrorCode;
+import com.google.ads.AdView;
 
 public class DefaultActivity extends ActionBarActivity {
 	protected String[] apostilas;
@@ -41,6 +47,8 @@ public class DefaultActivity extends ActionBarActivity {
     protected FragmentManager fragmentManager = getSupportFragmentManager();
     protected FragmentTransaction transaction;
     private LicaoPagerAdapter pagerAdapter;
+    private AdView mAdView;
+    protected TextView mAdStatus;
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +111,13 @@ public class DefaultActivity extends ActionBarActivity {
         	selectItem(apostila);
         }
         
+	    mAdStatus = (TextView) findViewById(R.id.status);
+	    mAdView = (AdView)findViewById(R.id.ad);
+	    mAdView.setAdListener(new MyAdListener());
+
+	    AdRequest adRequest = new AdRequest();
+	    adRequest.addKeyword("sporting goods");
+	    mAdView.loadAd(adRequest);
 	}
 	
 	@Override
@@ -273,5 +288,27 @@ public class DefaultActivity extends ActionBarActivity {
 			isShowTabBar();
 		}
 	}
+	
+	// Receives callbacks on various events related to fetching ads.  In this sample,
+    // the application displays a message on the screen.  A real application may,
+    // for example, fill the ad with a banner promoting a feature.
+    private class MyAdListener implements AdListener {
 
+        @Override
+        public void onDismissScreen(Ad ad) {}
+
+        @Override
+        public void onFailedToReceiveAd(Ad ad, ErrorCode errorCode) {
+            mAdStatus.setText(R.string.error_receive_ad);
+        }
+
+        @Override
+        public void onLeaveApplication(Ad ad) {}
+
+        @Override
+        public void onPresentScreen(Ad ad) {}
+
+        @Override
+        public void onReceiveAd(Ad ad) { mAdStatus.setText(""); }
+    }
 }
