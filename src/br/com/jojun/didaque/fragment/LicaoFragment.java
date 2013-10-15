@@ -11,11 +11,11 @@ import br.com.jojun.didaque.R;
 import br.com.jojun.didaque.bean.Apostila;
 
 public class LicaoFragment extends Fragment {
-	private TextView tvTitulo;
-	private TextView tvCatequese;
-	private Apostila apostila;
-	private int numeroApostila;
-	private int numeroLicao;
+	public TextView tvTitulo;
+	public TextView tvCatequese;
+	public Apostila apostila;
+	public int numeroApostila;
+	public int numeroLicao;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

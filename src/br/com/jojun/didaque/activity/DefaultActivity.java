@@ -3,15 +3,20 @@ package br.com.jojun.didaque.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.ShareActionProvider;
+import android.support.v7.widget.ShareActionProvider.OnShareTargetSelectedListener;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +30,14 @@ import br.com.jojun.didaque.bean.Apostila;
 import br.com.jojun.didaque.fragment.LicaoFragment;
 import br.com.jojun.didaque.fragment.TextosFragment;
 
+import com.facebook.FacebookException;
+import com.facebook.Session;
+import com.facebook.Session.StatusCallback;
+import com.facebook.SessionState;
+import com.facebook.UiLifecycleHelper;
+import com.facebook.widget.FacebookDialog;
+import com.facebook.widget.WebDialog;
+import com.facebook.widget.WebDialog.OnCompleteListener;
 import com.google.ads.Ad;
 import com.google.ads.AdListener;
 import com.google.ads.AdRequest;
@@ -50,17 +63,32 @@ public class DefaultActivity extends ActionBarActivity {
     private AdView mAdView;
     protected TextView mAdStatus;
     
+    private ShareActionProvider mShareActionProvider;
+    private UiLifecycleHelper uiHelper;
+    private StatusCallback callback;
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_dashboard);
-
 		mDrawerTitle = "Apostilas";
 		mTitle = "Didaque";
 		
+		Session.openActiveSession(this, true, new Session.StatusCallback() {
+
+		    // callback when session changes state
+		    @Override
+		    public void call(Session session, SessionState state, Exception exception) {
+
+		    }
+		  });
+
 		if(savedInstanceState != null){
 			telaInicial = savedInstanceState.getBoolean("tela");
 		} 
+		
+		uiHelper = new UiLifecycleHelper(this, callback);
+		uiHelper.onCreate(savedInstanceState);
 		
 	    pagerAdapter = new LicaoPagerAdapter(fragmentManager, new ArrayList<LicaoFragment>());
 		mViewPager = (ViewPager) findViewById(R.id.pager);
@@ -70,6 +98,7 @@ public class DefaultActivity extends ActionBarActivity {
 	            new ViewPager.SimpleOnPageChangeListener() {
 	                @Override
 	                public void onPageSelected(final int position) {
+	                	licao = position;
 	                	getSupportActionBar().setSelectedNavigationItem(position);
 	                }
 	            });
@@ -121,13 +150,49 @@ public class DefaultActivity extends ActionBarActivity {
 	}
 	
 	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	    super.onActivityResult(requestCode, resultCode, data);
+
+	    uiHelper.onActivityResult(requestCode, resultCode, data, new FacebookDialog.Callback() {
+	        @Override
+	        public void onError(FacebookDialog.PendingCall pendingCall, Exception error, Bundle data) {
+	            Log.e("Activity", String.format("Error: %s", error.toString()));
+	        }
+
+	        @Override
+	        public void onComplete(FacebookDialog.PendingCall pendingCall, Bundle data) {
+	            Log.i("Activity", "Success!");
+	        }
+	    });
+	}	
+	
+	@Override
+	protected void onResume() {
+	    super.onResume();
+	    uiHelper.onResume();
+	}
+
+	@Override
+	public void onPause() {
+	    super.onPause();
+	    uiHelper.onPause();
+	}
+
+	@Override
+	public void onDestroy() {
+	    super.onDestroy();
+	    uiHelper.onDestroy();
+	}
+	
+	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		// TODO Auto-generated method stub
 //		super.onSaveInstanceState(outState);
+		
 		outState.putBoolean("tela", telaInicial);
 		outState.putInt("apostila", apostila);
 		outState.putInt("licao", licao);
-		
+		uiHelper.onSaveInstanceState(outState);
 //		Log.i("DA", "TelaInicial: "+telaInicial);
 		
 	}
@@ -157,9 +222,10 @@ public class DefaultActivity extends ActionBarActivity {
 		        public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
 		        	mViewPager.setCurrentItem(tab.getPosition());
 		        	licao = tab.getPosition();
-//		        	
+		        	
 					fragmentAtual = new LicaoFragment();
 		    		ft.replace(R.id.content_frame, fragmentAtual);
+		    		supportInvalidateOptionsMenu();
 		    	}
 	
 		        public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
@@ -202,15 +268,75 @@ public class DefaultActivity extends ActionBarActivity {
 	
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Pass the event to ActionBarDrawerToggle, if it returns
-        // true, then it has handled the app icon touch event
+    	Log.i("DA", "No menu!");
         if (mDrawerToggle.onOptionsItemSelected(item)) {
           return true;
         }
+        
+//    	 // Handle presses on the action bar items
+//        switch (item.getItemId()) {
+//            case R.id.action_compartilhar:
+//                compartilhar();
+//                return true;
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
         return super.onOptionsItemSelected(item);
     }
     
-    /* Called whenever we call invalidateOptionsMenu() */
+    private void compartilhar() {
+    	Intent shareIntent = new Intent(Intent.ACTION_SEND);
+    	shareIntent.setType("text/plain");
+    	String texto = "";
+    	if(telaInicial){
+    		texto = ((TextView)findViewById(R.id.tv_textos_licao)).getText()+"\n"+
+    				((TextView)findViewById(R.id.tv_textos_texto)).getText();
+    	}else{
+    		LicaoFragment lf = (LicaoFragment)pagerAdapter.getItem(licao);
+    		texto = lf.tvTitulo.getText()+"\n\n"+
+    				lf.tvCatequese.getText();   		 
+    	}
+    	shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Compartilhamento do APP Didaquê");
+    	shareIntent.putExtra(Intent.EXTRA_TEXT, texto);
+    	mShareActionProvider.setOnShareTargetSelectedListener(new OnShareTargetSelectedListener() {
+			
+			@Override
+			public boolean onShareTargetSelected(ShareActionProvider shareActionProvider, Intent intent) {
+				if ("com.facebook.katana".equals(intent.getComponent().getPackageName())) {
+//					FacebookDialog shareDialog = new FacebookDialog.ShareDialogBuilder(DefaultActivity.this)
+//					.setName(intent.getStringExtra(Intent.EXTRA_SUBJECT))
+//					.setDescription(intent.getStringExtra(Intent.EXTRA_TEXT))
+//					.build();
+//					uiHelper.trackPendingDialogCall(shareDialog.present());
+//					
+					Bundle params = new Bundle();
+					params.putString("name", "An example parameter");
+					params.putString("link", "https://www.example.com/");
+
+					WebDialog feedDialog = (
+					        new WebDialog.FeedDialogBuilder(DefaultActivity.this,
+					            Session.getActiveSession(),
+					            params))
+					        .setOnCompleteListener(new OnCompleteListener(){
+
+								@Override
+								public void onComplete(Bundle values,
+										FacebookException error) {
+									// TODO Auto-generated method stub
+									
+								}})
+					        .build();
+					    feedDialog.show();
+					    return true;
+				}
+				else
+					return false;
+			}
+		});
+    	mShareActionProvider.setShareIntent(shareIntent);
+	}
+
+	/* Called whenever we call invalidateOptionsMenu() */
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         // If the nav drawer is open, hide action items related to the content view
@@ -271,9 +397,16 @@ public class DefaultActivity extends ActionBarActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.dashboard, menu);
-		return false;
+		
+		// Locate MenuItem with ShareActionProvider
+	    MenuItem item = menu.findItem(R.id.action_compartilhar);
+
+	    // Fetch and store ShareActionProvider
+	    mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+	    compartilhar();
+		return true;
 	}
-	
+
 	@Override
 	public void onBackPressed() {
 		// TODO Auto-generated method stub

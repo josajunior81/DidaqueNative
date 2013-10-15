@@ -1,9 +1,11 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:didaque="http://schemas.android.com/apk/res-auto" >
 
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="@string/action_settings"/>
+        android:id="@+id/action_compartilhar"
+        didaque:showAsAction="ifRoom"
+        android:title="@string/action_compartilhar"
+        android:icon="@drawable/ic_action_share"
+        didaque:actionProviderClass="android.support.v7.widget.ShareActionProvider"/>
 
 </menu>

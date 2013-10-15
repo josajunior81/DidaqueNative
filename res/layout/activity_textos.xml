@@ -15,7 +15,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="30sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textIsSelectable="true" />
 
         <TextView
             android:id="@+id/tv_textos_texto"
@@ -25,7 +26,8 @@
             android:layout_marginRight="15dp"
             android:gravity="center_horizontal|center_vertical"
             android:paddingTop="15dp"
-            android:textSize="20sp" />
+            android:textSize="20sp" 
+            android:textIsSelectable="true" />
     </LinearLayout>
 
 <!-- /ScrollView -->
