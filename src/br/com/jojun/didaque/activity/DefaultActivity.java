@@ -19,6 +19,7 @@ import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.ShareActionProvider.OnShareTargetSelectedListener;
 import android.text.ClipboardManager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +27,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import br.com.jojun.didaque.R;
 import br.com.jojun.didaque.adapter.LicaoPagerAdapter;
 import br.com.jojun.didaque.bean.Apostila;
@@ -251,6 +253,9 @@ public class DefaultActivity extends ActionBarActivity {
 			public boolean onShareTargetSelected(ShareActionProvider shareActionProvider, Intent intent) {
 				if ("com.facebook.katana".equals(intent.getComponent().getPackageName())) {
 					clipboard.setText(intent.getStringExtra(Intent.EXTRA_TEXT));
+					Toast toast = Toast.makeText(DefaultActivity.this, "TEXTO COPIADO, COLE AQUI!",  Toast.LENGTH_LONG);
+					toast.setGravity(Gravity.TOP|Gravity.CENTER_VERTICAL, 0, 100);
+					toast.show();
 					return true;
 				}
 				else
