@@ -3,6 +3,7 @@ package br.com.jojun.didaque.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.ShareActionProvider.OnShareTargetSelectedListener;
+import android.text.ClipboardManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,20 +32,13 @@ import br.com.jojun.didaque.bean.Apostila;
 import br.com.jojun.didaque.fragment.LicaoFragment;
 import br.com.jojun.didaque.fragment.TextosFragment;
 
-import com.facebook.FacebookException;
-import com.facebook.Session;
-import com.facebook.Session.StatusCallback;
-import com.facebook.SessionState;
-import com.facebook.UiLifecycleHelper;
-import com.facebook.widget.FacebookDialog;
-import com.facebook.widget.WebDialog;
-import com.facebook.widget.WebDialog.OnCompleteListener;
 import com.google.ads.Ad;
 import com.google.ads.AdListener;
 import com.google.ads.AdRequest;
 import com.google.ads.AdRequest.ErrorCode;
 import com.google.ads.AdView;
 
+@SuppressWarnings("deprecation")
 public class DefaultActivity extends ActionBarActivity {
 	protected String[] apostilas;
     protected DrawerLayout mDrawerLayout;
@@ -62,11 +57,9 @@ public class DefaultActivity extends ActionBarActivity {
     private LicaoPagerAdapter pagerAdapter;
     private AdView mAdView;
     protected TextView mAdStatus;
-    
     private ShareActionProvider mShareActionProvider;
-    private UiLifecycleHelper uiHelper;
-    private StatusCallback callback;
-    
+	private ClipboardManager clipboard;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -74,21 +67,11 @@ public class DefaultActivity extends ActionBarActivity {
 		mDrawerTitle = "Apostilas";
 		mTitle = "Didaque";
 		
-		Session.openActiveSession(this, true, new Session.StatusCallback() {
-
-		    // callback when session changes state
-		    @Override
-		    public void call(Session session, SessionState state, Exception exception) {
-
-		    }
-		  });
-
+		clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+		
 		if(savedInstanceState != null){
 			telaInicial = savedInstanceState.getBoolean("tela");
 		} 
-		
-		uiHelper = new UiLifecycleHelper(this, callback);
-		uiHelper.onCreate(savedInstanceState);
 		
 	    pagerAdapter = new LicaoPagerAdapter(fragmentManager, new ArrayList<LicaoFragment>());
 		mViewPager = (ViewPager) findViewById(R.id.pager);
@@ -150,41 +133,6 @@ public class DefaultActivity extends ActionBarActivity {
 	}
 	
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-	    super.onActivityResult(requestCode, resultCode, data);
-
-	    uiHelper.onActivityResult(requestCode, resultCode, data, new FacebookDialog.Callback() {
-	        @Override
-	        public void onError(FacebookDialog.PendingCall pendingCall, Exception error, Bundle data) {
-	            Log.e("Activity", String.format("Error: %s", error.toString()));
-	        }
-
-	        @Override
-	        public void onComplete(FacebookDialog.PendingCall pendingCall, Bundle data) {
-	            Log.i("Activity", "Success!");
-	        }
-	    });
-	}	
-	
-	@Override
-	protected void onResume() {
-	    super.onResume();
-	    uiHelper.onResume();
-	}
-
-	@Override
-	public void onPause() {
-	    super.onPause();
-	    uiHelper.onPause();
-	}
-
-	@Override
-	public void onDestroy() {
-	    super.onDestroy();
-	    uiHelper.onDestroy();
-	}
-	
-	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		// TODO Auto-generated method stub
 //		super.onSaveInstanceState(outState);
@@ -192,7 +140,6 @@ public class DefaultActivity extends ActionBarActivity {
 		outState.putBoolean("tela", telaInicial);
 		outState.putInt("apostila", apostila);
 		outState.putInt("licao", licao);
-		uiHelper.onSaveInstanceState(outState);
 //		Log.i("DA", "TelaInicial: "+telaInicial);
 		
 	}
@@ -296,38 +243,15 @@ public class DefaultActivity extends ActionBarActivity {
     		texto = lf.tvTitulo.getText()+"\n\n"+
     				lf.tvCatequese.getText();   		 
     	}
-    	shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Compartilhamento do APP Didaquê");
+    	shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Compartilhamento do APP DidaquÃª");
     	shareIntent.putExtra(Intent.EXTRA_TEXT, texto);
     	mShareActionProvider.setOnShareTargetSelectedListener(new OnShareTargetSelectedListener() {
 			
 			@Override
 			public boolean onShareTargetSelected(ShareActionProvider shareActionProvider, Intent intent) {
 				if ("com.facebook.katana".equals(intent.getComponent().getPackageName())) {
-//					FacebookDialog shareDialog = new FacebookDialog.ShareDialogBuilder(DefaultActivity.this)
-//					.setName(intent.getStringExtra(Intent.EXTRA_SUBJECT))
-//					.setDescription(intent.getStringExtra(Intent.EXTRA_TEXT))
-//					.build();
-//					uiHelper.trackPendingDialogCall(shareDialog.present());
-//					
-					Bundle params = new Bundle();
-					params.putString("name", "An example parameter");
-					params.putString("link", "https://www.example.com/");
-
-					WebDialog feedDialog = (
-					        new WebDialog.FeedDialogBuilder(DefaultActivity.this,
-					            Session.getActiveSession(),
-					            params))
-					        .setOnCompleteListener(new OnCompleteListener(){
-
-								@Override
-								public void onComplete(Bundle values,
-										FacebookException error) {
-									// TODO Auto-generated method stub
-									
-								}})
-					        .build();
-					    feedDialog.show();
-					    return true;
+					clipboard.setText(intent.getStringExtra(Intent.EXTRA_TEXT));
+					return true;
 				}
 				else
 					return false;
