@@ -9,5 +9,5 @@
 
     <!-- Enable automatic exception tracking -->
     <bool name="ga_reportUncaughtExceptions">true</bool>
-    <bool name="ga_debug">true</bool>
+    <string name="ga_logLevel">verbose</string>
 </resources>
