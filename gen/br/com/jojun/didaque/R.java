@@ -795,6 +795,13 @@ containing a value of this type.
         public static final int abc_config_allowActionMenuItemTextWithIcon=0x7f060004;
         public static final int abc_config_showMenuShortcutsWhenKeyboardPresent=0x7f060003;
         public static final int abc_split_action_bar_is_narrow=0x7f060002;
+        /**  Enable automatic activity tracking 
+         */
+        public static final int ga_autoActivityTracking=0x7f060006;
+        public static final int ga_debug=0x7f060008;
+        /**  Enable automatic exception tracking 
+         */
+        public static final int ga_reportUncaughtExceptions=0x7f060007;
     }
     public static final class color {
         public static final int abc_search_url_text_holo=0x7f070005;
@@ -1175,15 +1182,18 @@ containing a value of this type.
         /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
         public static final int abc_shareactionprovider_share_with_application=0x7f0a000b;
-        public static final int action_compartilhar=0x7f0a000f;
-        public static final int action_settings=0x7f0a000e;
-        public static final int admob_id=0x7f0a0013;
-        public static final int app_id=0x7f0a0015;
-        public static final int app_name=0x7f0a000d;
-        public static final int drawer_close=0x7f0a0012;
-        public static final int drawer_open=0x7f0a0011;
-        public static final int error_receive_ad=0x7f0a0014;
-        public static final int hello_world=0x7f0a0010;
+        public static final int action_compartilhar=0x7f0a0010;
+        public static final int action_settings=0x7f0a000f;
+        public static final int admob_id=0x7f0a0014;
+        public static final int app_id=0x7f0a0016;
+        public static final int app_name=0x7f0a000e;
+        public static final int drawer_close=0x7f0a0013;
+        public static final int drawer_open=0x7f0a0012;
+        public static final int error_receive_ad=0x7f0a0015;
+        /**  Replace placeholder ID with your tracking ID 
+         */
+        public static final int ga_trackingId=0x7f0a000d;
+        public static final int hello_world=0x7f0a0011;
     }
     public static final class style {
         /** 

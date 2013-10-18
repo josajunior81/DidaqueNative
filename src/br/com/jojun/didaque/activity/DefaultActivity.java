@@ -39,6 +39,7 @@ import com.google.ads.AdListener;
 import com.google.ads.AdRequest;
 import com.google.ads.AdRequest.ErrorCode;
 import com.google.ads.AdView;
+import com.google.analytics.tracking.android.EasyTracker;
 
 @SuppressWarnings("deprecation")
 public class DefaultActivity extends ActionBarActivity {
@@ -132,6 +133,18 @@ public class DefaultActivity extends ActionBarActivity {
 	    AdRequest adRequest = new AdRequest();
 	    adRequest.addKeyword("sporting goods");
 	    mAdView.loadAd(adRequest);
+	}
+	
+	@Override
+	public void onStart() {
+		super.onStart();
+		EasyTracker.getInstance().activityStart(this); // Add this method.
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		EasyTracker.getInstance().activityStop(this); // Add this method.
 	}
 	
 	@Override
