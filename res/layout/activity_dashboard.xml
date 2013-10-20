@@ -49,11 +49,6 @@
             android:layout_centerHorizontal="true"
             />
 
-        <TextView
-            android:id="@+id/status"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true" />
     </RelativeLayout>
 
     <!-- The navigation drawer -->

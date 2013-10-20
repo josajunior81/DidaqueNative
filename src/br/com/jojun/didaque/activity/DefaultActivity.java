@@ -58,7 +58,7 @@ public class DefaultActivity extends ActionBarActivity {
     protected FragmentTransaction transaction;
     private LicaoPagerAdapter pagerAdapter;
     private AdView mAdView;
-    protected TextView mAdStatus;
+//    protected TextView mAdStatus;
     private ShareActionProvider mShareActionProvider;
 	private ClipboardManager clipboard;
 	
@@ -125,7 +125,7 @@ public class DefaultActivity extends ActionBarActivity {
         	selectItem(apostila);
         }
         
-	    mAdStatus = (TextView) findViewById(R.id.status);
+//	    mAdStatus = (TextView) findViewById(R.id.status);
 	    mAdView = (AdView)findViewById(R.id.ad);
 	    mAdView.setAdListener(new MyAdListener());
 
@@ -386,7 +386,7 @@ public class DefaultActivity extends ActionBarActivity {
 
         @Override
         public void onFailedToReceiveAd(Ad ad, ErrorCode errorCode) {
-            mAdStatus.setText(R.string.error_receive_ad);
+//            mAdStatus.setText(R.string.error_receive_ad);
         }
 
         @Override
@@ -396,6 +396,8 @@ public class DefaultActivity extends ActionBarActivity {
         public void onPresentScreen(Ad ad) {}
 
         @Override
-        public void onReceiveAd(Ad ad) { mAdStatus.setText(""); }
+        public void onReceiveAd(Ad ad) { 
+//        	mAdStatus.setText(""); 
+        }
     }
 }
