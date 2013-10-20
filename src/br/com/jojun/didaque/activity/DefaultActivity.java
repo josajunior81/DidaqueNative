@@ -18,7 +18,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.ShareActionProvider.OnShareTargetSelectedListener;
 import android.text.ClipboardManager;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -156,7 +155,7 @@ public class DefaultActivity extends ActionBarActivity {
 		outState.putInt("apostila", apostila);
 		outState.putInt("licao", licao);
 //		Log.i("DA", "TelaInicial: "+telaInicial);
-		
+				
 	}
 	
 	protected void isShowTabBar(){
@@ -187,7 +186,8 @@ public class DefaultActivity extends ActionBarActivity {
 		        	
 					fragmentAtual = new LicaoFragment();
 		    		ft.replace(R.id.content_frame, fragmentAtual);
-		    		supportInvalidateOptionsMenu();
+		    		if(mShareActionProvider != null)
+		    			mShareActionProvider.setShareIntent(compartilhar());
 		    	}
 	
 		        public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
@@ -230,7 +230,6 @@ public class DefaultActivity extends ActionBarActivity {
 	
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-    	Log.i("DA", "No menu!");
         if (mDrawerToggle.onOptionsItemSelected(item)) {
           return true;
         }
@@ -246,7 +245,9 @@ public class DefaultActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
     
-    private void compartilhar() {
+    private Intent compartilhar() {
+    	if(mShareActionProvider == null)
+    		return null;
     	Intent shareIntent = new Intent(Intent.ACTION_SEND);
     	shareIntent.setType("text/plain");
     	String texto = "";
@@ -255,11 +256,12 @@ public class DefaultActivity extends ActionBarActivity {
     				((TextView)findViewById(R.id.tv_textos_texto)).getText();
     	}else{
     		LicaoFragment lf = (LicaoFragment)pagerAdapter.getItem(licao);
-    		texto = lf.tvTitulo.getText()+"\n\n"+
-    				lf.tvCatequese.getText();   		 
+    		if(lf.tvCatequese != null)
+    			texto = lf.tvTitulo.getText()+"\n\n"+lf.tvCatequese.getText();   		 
     	}
     	shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Compartilhamento do APP Didaquê");
     	shareIntent.putExtra(Intent.EXTRA_TEXT, texto);
+    	
     	mShareActionProvider.setOnShareTargetSelectedListener(new OnShareTargetSelectedListener() {
 			
 			@Override
@@ -275,15 +277,25 @@ public class DefaultActivity extends ActionBarActivity {
 					return false;
 			}
 		});
-    	mShareActionProvider.setShareIntent(shareIntent);
+//    	mShareActionProvider.setShareIntent(shareIntent);
+    	return shareIntent;
 	}
 
 	/* Called whenever we call invalidateOptionsMenu() */
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
+    	 
         // If the nav drawer is open, hide action items related to the content view
 //        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
+		// Locate MenuItem with ShareActionProvider
+//	    MenuItem item = menu.findItem(R.id.action_compartilhar);
+//
+//	    // Fetch and store ShareActionProvider
+//	    mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+//	    mShareActionProvider.setShareIntent(compartilhar());
+    	
         return super.onPrepareOptionsMenu(menu);
+        
     }
 	
 	protected class DrawerItemClickListener implements ListView.OnItemClickListener {
@@ -345,7 +357,7 @@ public class DefaultActivity extends ActionBarActivity {
 
 	    // Fetch and store ShareActionProvider
 	    mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
-	    compartilhar();
+	    mShareActionProvider.setShareIntent(compartilhar());
 		return true;
 	}
 
