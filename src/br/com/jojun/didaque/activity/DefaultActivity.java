@@ -174,11 +174,10 @@ public class DefaultActivity extends ActionBarActivity {
 	        	fragments.add(fragment);
 		    }
 
-		    pagerAdapter.setListFragments(fragments);
-		    pagerAdapter.notifyDataSetChanged();
+		    pagerAdapter = new LicaoPagerAdapter(fragmentManager, fragments);
+			pagerAdapter.notifyDataSetChanged();
 			mViewPager.setAdapter(pagerAdapter);
-
-		 // Create a tab listener that is called when the user changes tabs.
+    
 		    ActionBar.TabListener tabListener = new ActionBar.TabListener() {
 		        public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
 		        	mViewPager.setCurrentItem(tab.getPosition());
@@ -233,15 +232,6 @@ public class DefaultActivity extends ActionBarActivity {
         if (mDrawerToggle.onOptionsItemSelected(item)) {
           return true;
         }
-        
-//    	 // Handle presses on the action bar items
-//        switch (item.getItemId()) {
-//            case R.id.action_compartilhar:
-//                compartilhar();
-//                return true;
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
         return super.onOptionsItemSelected(item);
     }
     
