@@ -246,7 +246,7 @@ public class DefaultActivity extends ActionBarActivity {
     				((TextView)findViewById(R.id.tv_textos_texto)).getText();
     	}else{
     		LicaoFragment lf = (LicaoFragment)pagerAdapter.getItem(licao);
-    		if(lf.tvCatequese != null)
+    		if(lf != null && lf.tvCatequese != null)
     			texto = lf.tvTitulo.getText()+"\n\n"+lf.tvCatequese.getText();   		 
     	}
     	shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Compartilhamento do APP Didaquê");

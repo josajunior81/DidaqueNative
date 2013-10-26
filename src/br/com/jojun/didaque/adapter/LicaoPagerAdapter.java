@@ -17,7 +17,10 @@ public class LicaoPagerAdapter extends FragmentStatePagerAdapter {
 
 	@Override
 	public LicaoFragment getItem(int position) {
-		return getListFragments().get(position);
+		if(getListFragments().size() > 0)
+			return getListFragments().get(position);
+		else
+			return null;
 	}
 
 	@Override
