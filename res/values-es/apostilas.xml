@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="array_apostilas">
+        <item>Iniciar</item>
+        <item>Principios Elementales</item>
+        <item>Propósito Eterno</item>
+        <item>La vida en Cristo</item>
+        <item>La comunión con Dios</item>
+    </string-array>
+</resources>
