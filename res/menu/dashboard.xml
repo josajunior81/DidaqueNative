@@ -3,12 +3,12 @@
 
     <item
         android:id="@+id/action_compartilhar"
-        didaque:showAsAction="collapseActionView"
+        didaque:showAsAction="always"
         android:title="@string/action_compartilhar"
         android:icon="@drawable/ic_action_share"
         didaque:actionProviderClass="android.support.v7.widget.ShareActionProvider"/>
     
-        <item
+        <!--item
         android:id="@+id/action_setup"
         didaque:showAsAction="collapseActionView"
         android:title="@string/action_setup"
@@ -25,7 +25,7 @@
         android:id="@+id/action_sobre"
         didaque:showAsAction="collapseActionView"
         android:title="@string/action_sobre"
-        android:icon="@drawable/ic_action_about"/>
+        android:icon="@drawable/ic_action_about"/-->
                 
 
 </menu>

@@ -67,7 +67,7 @@ public class DefaultActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_dashboard);
 		mDrawerTitle = "Apostilas";
-		mTitle = "Didaque";
+		mTitle = getResources().getString(R.string.app_name);
 		
 		clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
 		
@@ -102,6 +102,8 @@ public class DefaultActivity extends ActionBarActivity {
 
             /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {
+            	if(telaInicial)
+            		mTitle = getResources().getString(R.string.app_name);
                 getSupportActionBar().setTitle(mTitle);
                 supportInvalidateOptionsMenu();
             }

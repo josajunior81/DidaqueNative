@@ -2,6 +2,7 @@ package br.com.jojun.didaque.bean;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import br.com.jojun.didaque.DidaqueApplication;
 import br.com.jojun.didaque.util.DBHelper;
 
 public class Apostila {
@@ -10,10 +11,12 @@ public class Apostila {
 	public String tituloLicao;
 	public String catequese;
 	public int numeroApostila;
+	public String idioma;
+	
 	public static Apostila getLicao(int numeroLicao, int numeroApostila) {
 		SQLiteDatabase db = DBHelper.getInstance().getReadableDatabase();
 		Cursor cursor = db.query("Apostila ",
-                new String[] { "tituloLicao","catequese" }, "numeroLicao = "+numeroLicao+" AND numeroApostila = "+numeroApostila, null, null, null, null);
+                new String[] { "tituloLicao","catequese" }, "numeroLicao = "+numeroLicao+" AND numeroApostila = "+numeroApostila+" AND idioma = '"+DidaqueApplication.LANG+"'", null, null, null, null);
 		if(!cursor.moveToFirst())
 			return null;
 		else {
@@ -29,7 +32,7 @@ public class Apostila {
 	public static int getQuantidadeLicoes(int apostila) {
 		SQLiteDatabase db = DBHelper.getInstance().getReadableDatabase();
 		Cursor cursor = db.query("Apostila ",
-                new String[] { "tituloLicao","catequese" }, " numeroApostila = "+apostila, null, null, null, null);
+                new String[] { "tituloLicao","catequese" }, " numeroApostila = "+apostila+" AND idioma = '"+DidaqueApplication.LANG+"'", null, null, null, null);
 		int quantidade = cursor.getCount();
 		cursor.close();
 		db.close();
