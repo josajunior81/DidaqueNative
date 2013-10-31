@@ -1144,43 +1144,57 @@ containing a value of this type.
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
+ Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
          */
         public static final int abc_action_bar_home_description=0x7f0a0001;
         /**  Content description for the action bar "up" affordance. [CHAR LIMIT=NONE] 
+ Content description for the action bar "up" affordance. [CHAR LIMIT=NONE] 
          */
         public static final int abc_action_bar_up_description=0x7f0a0002;
         /**  Content description for the action menu overflow button. [CHAR LIMIT=NONE] 
+ Content description for the action menu overflow button. [CHAR LIMIT=NONE] 
          */
         public static final int abc_action_menu_overflow_description=0x7f0a0003;
         /**  Label for the "Done" button on the far left of action mode toolbars. 
+ Label for the "Done" button on the far left of action mode toolbars. 
          */
         public static final int abc_action_mode_done=0x7f0a0000;
         /**  Title for a button to expand the list of activities in ActivityChooserView [CHAR LIMIT=25] 
+ Title for a button to expand the list of activities in ActivityChooserView [CHAR LIMIT=25] 
          */
         public static final int abc_activity_chooser_view_see_all=0x7f0a000a;
         /**  ActivityChooserView - accessibility support 
  Description of the shwoing of a popup window with activities to choose from. [CHAR LIMIT=NONE] 
+ ActivityChooserView - accessibility support 
+ Description of the shwoing of a popup window with activities to choose from. [CHAR LIMIT=NONE] 
          */
         public static final int abc_activitychooserview_choose_application=0x7f0a0009;
         /**  SearchView accessibility description for clear button [CHAR LIMIT=NONE] 
+ SearchView accessibility description for clear button [CHAR LIMIT=NONE] 
          */
         public static final int abc_searchview_description_clear=0x7f0a0006;
         /**  SearchView accessibility description for search text field [CHAR LIMIT=NONE] 
+ SearchView accessibility description for search text field [CHAR LIMIT=NONE] 
          */
         public static final int abc_searchview_description_query=0x7f0a0005;
         /**  SearchView accessibility description for search button [CHAR LIMIT=NONE] 
+ SearchView accessibility description for search button [CHAR LIMIT=NONE] 
          */
         public static final int abc_searchview_description_search=0x7f0a0004;
         /**  SearchView accessibility description for submit button [CHAR LIMIT=NONE] 
+ SearchView accessibility description for submit button [CHAR LIMIT=NONE] 
          */
         public static final int abc_searchview_description_submit=0x7f0a0007;
         /**  SearchView accessibility description for voice button [CHAR LIMIT=NONE] 
+ SearchView accessibility description for voice button [CHAR LIMIT=NONE] 
          */
         public static final int abc_searchview_description_voice=0x7f0a0008;
         /**  Description of the choose target button in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
+ Description of the choose target button in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
         public static final int abc_shareactionprovider_share_with=0x7f0a000c;
         /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
+ Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
         public static final int abc_shareactionprovider_share_with_application=0x7f0a000b;
         public static final int action_compartilhar=0x7f0a000f;
