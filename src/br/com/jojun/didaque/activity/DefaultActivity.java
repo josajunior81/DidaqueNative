@@ -2,11 +2,14 @@ package br.com.jojun.didaque.activity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -27,6 +30,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import br.com.jojun.didaque.DidaqueApplication;
 import br.com.jojun.didaque.R;
 import br.com.jojun.didaque.adapter.LicaoPagerAdapter;
 import br.com.jojun.didaque.bean.Apostila;
@@ -61,11 +65,26 @@ public class DefaultActivity extends ActionBarActivity {
 //    protected TextView mAdStatus;
     private ShareActionProvider mShareActionProvider;
 	private ClipboardManager clipboard;
+	private ArrayAdapter<String> drawerAdapter;
+	private static final int RESULT_SETTINGS = 1;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_dashboard);
+		
+		initActivity(savedInstanceState);
+        
+//	    mAdStatus = (TextView) findViewById(R.id.status);
+	    mAdView = (AdView)findViewById(R.id.ad);
+	    mAdView.setAdListener(new MyAdListener());
+
+	    AdRequest adRequest = new AdRequest();
+	    adRequest.addKeyword("sporting goods");
+	    mAdView.loadAd(adRequest);
+	}
+	
+	private void initActivity(Bundle savedInstanceState) {
 		mDrawerTitle = "Apostilas";
 		mTitle = getResources().getString(R.string.app_name);
 		
@@ -93,7 +112,10 @@ public class DefaultActivity extends ActionBarActivity {
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
         // Set the adapter for the list view
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.adapter_list_apostila, apostilas));
+        drawerAdapter = new ArrayAdapter<String>(this, R.layout.adapter_list_apostila, apostilas);
+        mDrawerList.setAdapter(drawerAdapter);
+        drawerAdapter.notifyDataSetChanged();
+        
         // Set the list's click listener
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
         
@@ -126,16 +148,9 @@ public class DefaultActivity extends ActionBarActivity {
         	licao = savedInstanceState.getInt("licao");
         	selectItem(apostila);
         }
-        
-//	    mAdStatus = (TextView) findViewById(R.id.status);
-	    mAdView = (AdView)findViewById(R.id.ad);
-	    mAdView.setAdListener(new MyAdListener());
-
-	    AdRequest adRequest = new AdRequest();
-	    adRequest.addKeyword("sporting goods");
-	    mAdView.loadAd(adRequest);
+		
 	}
-	
+
 	@Override
 	public void onStart() {
 		super.onStart();
@@ -231,11 +246,55 @@ public class DefaultActivity extends ActionBarActivity {
 	
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-          return true;
-        }
-        return super.onOptionsItemSelected(item);
+    	if (mDrawerToggle.onOptionsItemSelected(item)) {
+    		return true;
+    	}
+
+    	switch (item.getItemId()) {
+    	case R.id.action_setup:
+    		Intent intent = new Intent(this, PreferenciasActivity.class);
+    		startActivityForResult(intent, RESULT_SETTINGS);
+    		return true;
+    	default:
+    		return super.onOptionsItemSelected(item);
+    	}
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    	super.onActivityResult(requestCode, resultCode, data);
+
+    	switch (requestCode) {
+    	case RESULT_SETTINGS:
+    		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+    		Locale locale = new Locale(sharedPrefs.getString("prefIdioma", "PT"));
+    		Locale.setDefault(locale);
+    		Configuration config = new Configuration();
+    		config.locale = locale;
+    		getBaseContext().getResources().updateConfiguration(config, 
+    		getBaseContext().getResources().getDisplayMetrics());
+//    		initActivity(getIntent().getExtras());
+//    		isShowTabBar();
+    		
+    		DidaqueApplication.LANG = DidaqueApplication.getContext().getResources().getConfiguration().locale.getLanguage().toUpperCase();
+    		
+    		Intent intent = getIntent();
+    	    finish();
+    	    startActivity(intent);
+    		
+    		break;
+    	}
+    }
+    
+//    private void showUserSettings() {
+//        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+// 
+//        StringBuilder builder = new StringBuilder();
+// 
+//        builder.append("\n Idioma: " + sharedPrefs.getString("prefIdioma", "NULL"));
+// 
+//        Log.i("DA", builder.toString());
+//    }
     
     private Intent compartilhar() {
     	if(mShareActionProvider == null)

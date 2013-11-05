@@ -107,8 +107,16 @@ public class DBHelper extends SQLiteOpenHelper {
 			db.execSQL("INSERT INTO TextoAleatorio (texto,licao,idioma)  VALUES ('Predicar el Evangelio del Reino es hablar de Jesús y de la Puerta del Reino.', 'El Propósito Eterno de Dios', 'ES')");
 			db.execSQL("INSERT INTO TextoAleatorio (texto,licao,idioma)  VALUES ('Todos los miembros del cuerpo deben estar unidos y bien concertados entre sí por todas las coyunturas y ligamentos.', 'El Propósito Eterno de Dios', 'ES')");
 
-		}
-		
+		}else 
+			if(newVersion == 3){
+				db.execSQL("INSERT INTO Apostila (numeroLicao,tituloApostila,tituloLicao,catequese,numeroApostila,idioma)  VALUES (1,'Meditação Semanal', 'Segunda', '<b>Didaquê</b><br/>Mt 5:1-26<br/><br /><b>Kerigma</b><br/>Jo 3:1-21', 5,'PT')");
+				db.execSQL("INSERT INTO Apostila (numeroLicao,tituloApostila,tituloLicao,catequese,numeroApostila,idioma)  VALUES (2,'Meditação Semanal', 'Terça', '<b>Didaquê</b><br/>Mt 5:27-48<br/><br /><b>Kerigma</b><br/>Jo 6:27-40',5,'PT')");
+				db.execSQL("INSERT INTO Apostila (numeroLicao,tituloApostila,tituloLicao,catequese,numeroApostila,idioma)  VALUES (3,'Meditação Semanal', 'Quarta', '<b>Didaquê</b><br/>Mt 6:1-18 <br/><br /><b>Kerigma</b><br/>Jo 6:41-59',5,'PT')");
+				db.execSQL("INSERT INTO Apostila (numeroLicao,tituloApostila,tituloLicao,catequese,numeroApostila,idioma)  VALUES (4,'Meditação Semanal', 'Quinta', '<b>Didaquê</b><br/>Mt 6:19-34<br/><br /><b>Kerigma</b><br/>Jo 7:37-39; Jo 14:16-31',5,'PT')");
+				db.execSQL("INSERT INTO Apostila (numeroLicao,tituloApostila,tituloLicao,catequese,numeroApostila,idioma)  VALUES (5,'Meditação Semanal', 'Sexta', '<b>Didaquê</b><br/>Mt 7:1-12<br/><br /><b>Kerigma</b><br/>Jo 15:26; 16:15',5,'PT')");
+				db.execSQL("INSERT INTO Apostila (numeroLicao,tituloApostila,tituloLicao,catequese,numeroApostila,idioma)  VALUES (6,'Meditação Semanal', 'Sábado', '<b>Didaquê</b><br/>Mt 7:13-29<br/><br /><b>Kerigma</b><br/>Rm5:1-2, 10, 11; 6:4-6; 8:1-11; Gl 2:19-21; Cl 1:13-20',5,'PT')");
+				db.execSQL("INSERT INTO Apostila (numeroLicao,tituloApostila,tituloLicao,catequese,numeroApostila,idioma)  VALUES (7,'Meditação Semanal', 'Domingo', '1. O que Deus me falou nesta semana?<br /><br />2. Há algo para compartilhar ou confessar a outros?<br /><br />3. Qual o desafio para a próxima semana?',5,'PT')");
+			}
 //		copyDatabase();
 	}
 	

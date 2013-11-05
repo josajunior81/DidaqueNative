@@ -8,13 +8,13 @@
         android:icon="@drawable/ic_action_share"
         didaque:actionProviderClass="android.support.v7.widget.ShareActionProvider"/>
     
-        <!--item
+        <item
         android:id="@+id/action_setup"
-        didaque:showAsAction="collapseActionView"
+        didaque:showAsAction="ifRoom|collapseActionView"
         android:title="@string/action_setup"
         android:icon="@drawable/ic_action_settings"/>
         
-        <item
+        <!--item
         android:id="@+id/action_links"
         didaque:showAsAction="collapseActionView"
         android:title="@string/action_links"

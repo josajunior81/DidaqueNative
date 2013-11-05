@@ -6,10 +6,12 @@ import java.util.Locale;
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import br.com.jojun.didaque.util.DBHelper;
 
@@ -17,7 +19,7 @@ public class DidaqueApplication  extends Application {
 
 	private static final String TAG = DidaqueApplication.class.getSimpleName();
 	@SuppressLint("DefaultLocale")
-	public static String LANG = Locale.getDefault().getLanguage().toUpperCase();
+	public static String LANG;
 	private long inicio;
 	private long fim;
 	
@@ -29,6 +31,15 @@ public class DidaqueApplication  extends Application {
 		super.onCreate();
 		context = this;
 		
+		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+		Locale locale = new Locale(sharedPrefs.getString("prefIdioma", "PT"));
+		Locale.setDefault(locale);
+		Configuration config = new Configuration();
+		config.locale = locale;
+		getBaseContext().getResources().updateConfiguration(config, 
+		getBaseContext().getResources().getDisplayMetrics());
+		
+		LANG = context.getResources().getConfiguration().locale.getLanguage().toUpperCase();
 		if(!LANG.equalsIgnoreCase("PT") && !LANG.equalsIgnoreCase("ES") )
 			LANG = "PT";
 		
