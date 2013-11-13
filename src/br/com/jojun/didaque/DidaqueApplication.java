@@ -13,6 +13,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import br.com.jojun.didaque.util.Constantes;
 import br.com.jojun.didaque.util.DBHelper;
 
 public class DidaqueApplication  extends Application {
@@ -58,11 +59,22 @@ public class DidaqueApplication  extends Application {
 			timeDelay = (diff < timeDelay) ? timeDelay - diff : 0;
 		}
 
-		final Cursor cursor = database.rawQuery("SELECT COUNT() as total FROM sqlite_master WHERE name ='Apostila'", null);
+		Cursor cursor = database.rawQuery("SELECT COUNT() as total FROM sqlite_master WHERE name ='Apostila'", null);
 		cursor.moveToNext();
 		if(cursor.getInt(0) <= 0) {
 			DBHelper.copyDatabase();
 		}
+		cursor.close();
+		database.close();
+		
+		database = DBHelper.getBibliaInstance(getContext(), Constantes.ALMEIDA, Constantes.ALMEIDA_VERSAO).getReadableDatabase();
+
+		cursor = database.rawQuery("SELECT COUNT() as total FROM sqlite_master WHERE name ='versiculos'", null);
+		cursor.moveToNext();
+		if(cursor.getInt(0) <= 0) {
+			DBHelper.copyBibliaDatabase(Constantes.ALMEIDA, Constantes.ALMEIDA_VERSAO);
+		}
+		cursor.close();
 		database.close();
 	}
 	

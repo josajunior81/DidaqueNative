@@ -28,6 +28,10 @@ public class DBHelper extends SQLiteOpenHelper {
     public DBHelper(Context context) {
         super(context, dbName, null, DATABASE_VERSION);
     }
+    
+    public DBHelper(Context context, String db, int versao) {
+        super(context, db, null, versao);
+    }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -39,6 +43,27 @@ public class DBHelper extends SQLiteOpenHelper {
 		InputStream is;
 		try {
 			is = DidaqueApplication.getContext().getAssets().open(DB_NAME_ASSETS);
+
+			OutputStream os = new FileOutputStream(dbFile);
+
+			byte[] buffer = new byte[1024];
+			while (is.read(buffer) > 0) {
+				os.write(buffer);
+			}
+
+			os.flush();
+			os.close();
+			is.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
+    
+    public static void copyBibliaDatabase(String biblia, int versao){
+    	File dbFile = DidaqueApplication.getContext().getDatabasePath(biblia);
+		InputStream is;
+		try {
+			is = DidaqueApplication.getContext().getAssets().open(biblia);
 
 			OutputStream os = new FileOutputStream(dbFile);
 
@@ -142,6 +167,10 @@ public class DBHelper extends SQLiteOpenHelper {
 		}
 		
 		return instance;
+	}
+	
+	public static DBHelper getBibliaInstance(Context context, String db, int versao){
+		return new DBHelper(context, db, versao);
 	}
 
 }

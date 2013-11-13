@@ -5,6 +5,7 @@
     <string name="activity_config">Configurações</string>
     <string name="action_compartilhar">Compartilhar</string>
     <string name="action_setup">Configurações</string>
+    <string name="action_biblia">Bíblia</string>    
     <string name="action_sobre">Sobre</string>
     <string name="action_links">Links úteis</string>
     <string name="drawer_open">Abrir</string>

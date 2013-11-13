@@ -1,0 +1,67 @@
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:googleads="http://schemas.android.com/apk/lib/com.google.ads"
+    android:id="@+id/drawer_layout_biblia"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <!-- The main content view -->
+
+        <FrameLayout
+            android:id="@+id/content_frame_biblia"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <fragment
+                android:id="@+id/fragment_biblia"
+                android:name="br.com.jojun.didaque.fragment.BibliaFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+            
+        </FrameLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager_biblia"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/divider_biblia" />
+
+        <View
+            android:id="@+id/divider_biblia"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_above="@+id/ad_biblia"
+            android:layout_marginBottom="2dp"
+            android:background="@android:color/darker_gray"
+            android:paddingBottom="5dp" />
+
+        <com.google.ads.AdView
+            android:id="@+id/ad_biblia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            googleads:adSize="BANNER"
+            googleads:adUnitId="@string/admob_id"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            />
+
+    </RelativeLayout>
+
+    <!-- The navigation drawer -->
+
+    <ListView
+        android:id="@+id/left_drawer_biblia"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="#111"
+        android:choiceMode="singleChoice"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp" />
+
+</android.support.v4.widget.DrawerLayout>

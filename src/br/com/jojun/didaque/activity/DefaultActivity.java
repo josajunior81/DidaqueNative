@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -36,14 +37,13 @@ import br.com.jojun.didaque.adapter.LicaoPagerAdapter;
 import br.com.jojun.didaque.bean.Apostila;
 import br.com.jojun.didaque.fragment.LicaoFragment;
 import br.com.jojun.didaque.fragment.TextosFragment;
+import br.com.jojun.didaque.util.MyAdListener;
 
-import com.google.ads.Ad;
-import com.google.ads.AdListener;
 import com.google.ads.AdRequest;
-import com.google.ads.AdRequest.ErrorCode;
 import com.google.ads.AdView;
 import com.google.analytics.tracking.android.EasyTracker;
 
+@SuppressLint("DefaultLocale")
 @SuppressWarnings("deprecation")
 public class DefaultActivity extends ActionBarActivity {
 	protected String[] apostilas;
@@ -250,11 +250,16 @@ public class DefaultActivity extends ActionBarActivity {
     		return true;
     	}
 
+    	Intent intent = null;
     	switch (item.getItemId()) {
     	case R.id.action_setup:
-    		Intent intent = new Intent(this, PreferenciasActivity.class);
+    		intent = new Intent(this, PreferenciasActivity.class);
     		startActivityForResult(intent, RESULT_SETTINGS);
     		return true;
+    	case R.id.action_biblia:
+    		intent = new Intent(this, BibliaActivity.class);
+    		startActivityForResult(intent, RESULT_SETTINGS);
+    		return true;    		
     	default:
     		return super.onOptionsItemSelected(item);
     	}
@@ -426,29 +431,4 @@ public class DefaultActivity extends ActionBarActivity {
 			isShowTabBar();
 		}
 	}
-	
-	// Receives callbacks on various events related to fetching ads.  In this sample,
-    // the application displays a message on the screen.  A real application may,
-    // for example, fill the ad with a banner promoting a feature.
-    private class MyAdListener implements AdListener {
-
-        @Override
-        public void onDismissScreen(Ad ad) {}
-
-        @Override
-        public void onFailedToReceiveAd(Ad ad, ErrorCode errorCode) {
-//            mAdStatus.setText(R.string.error_receive_ad);
-        }
-
-        @Override
-        public void onLeaveApplication(Ad ad) {}
-
-        @Override
-        public void onPresentScreen(Ad ad) {}
-
-        @Override
-        public void onReceiveAd(Ad ad) { 
-//        	mAdStatus.setText(""); 
-        }
-    }
 }
