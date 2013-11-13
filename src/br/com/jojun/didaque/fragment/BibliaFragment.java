@@ -2,9 +2,6 @@ package br.com.jojun.didaque.fragment;
 
 import java.util.List;
 
-import com.google.ads.al;
-import com.google.ads.l;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import br.com.jojun.didaque.DidaqueApplication;
 import br.com.jojun.didaque.R;
 import br.com.jojun.didaque.bean.Biblia;
 
@@ -41,16 +37,12 @@ public class BibliaFragment extends Fragment {
 			for(Biblia b : alBiblia) {
 				TextView tv = new TextView(getActivity());
 				tv.setText(b.versiculo+". "+b.texto);
+				tv.setPadding(5, 5, 5, 5);
+				tv.setTextSize(9 * getResources().getDisplayMetrics().density);
 				layoutBiblia.addView(tv);
+				
 			}
     	}
-//    	if(alVersiculos != null) {
-//			for(int i=0; i< alVersiculos.size(); i++) {
-//				TextView tv = new TextView(getActivity());
-//				tv.setText((i+1)+". "+alVersiculos.get(i));
-//				layoutBiblia.addView(tv);
-//			}
-//    	}
     }
 
 	public void setVersiculos(String livro, int capitulo) {

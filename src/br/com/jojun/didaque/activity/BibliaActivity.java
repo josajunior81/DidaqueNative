@@ -201,16 +201,11 @@ public class BibliaActivity extends ActionBarActivity {
 	
 	/** Swaps fragments in the main content view */
 	protected void selectItem(int position) {
+		
+		if(nomeLivro != null && !nomeLivro.equalsIgnoreCase(livros[position]))
+			capitulo = 0;
+		
 		nomeLivro = livros[position];
-		pagerAdapter.setListFragments(new ArrayList<BibliaFragment>());
-		pagerAdapter.notifyDataSetChanged();
-		mViewPager.setAdapter(pagerAdapter);
-		transaction = fragmentManager.beginTransaction();
-		BibliaFragment frag = (BibliaFragment)fragmentManager.findFragmentById(R.id.fragment_biblia);
-		frag.setCapitulo(position);
-		transaction.addToBackStack(null);
-		transaction.show(frag);
-		transaction.commit();
 
 		mDrawerList.setItemChecked(position, true);
 	    setTitle(livros[position]);
@@ -220,32 +215,7 @@ public class BibliaActivity extends ActionBarActivity {
 			getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 	   
 	    fragments = new ArrayList<BibliaFragment>();
-
-//	    List<Biblia> lb = Biblia.getVersiculos(livros[position]);	 	
-//	    Map<Integer, List<String>> mapBiblia = new HashMap<Integer, List<String>>();
-//	    for(int i=0; i<qtdCapitulos;i++){
-//	    	Biblia b = lb.get(i);
-//	    	List<String> versiculos = new ArrayList<String>();
-//	    	for(int j=0; j<lb.size();j++)
-//	    		if(b.capitulo == (j+1))
-//	    			versiculos.add(b.texto);
-//	    	
-//	    	mapBiblia.put(i, versiculos);
-//	    }
 	    
-	    int qtdCapitulos = Biblia.getQuantidadeCapitulos(livros[position]);
-	    for (int i = 0; i < qtdCapitulos; i++) {
-	    	BibliaFragment fragment = (BibliaFragment) BibliaFragment.instantiate(BibliaActivity.this, BibliaFragment.class.getName());
-    		fragment.setCapitulo((i+1));
-    		fragment.setLivro(livros[position]);
-//    		fragment.setVersiculos(mapBiblia.get(i));
-        	fragments.add(fragment);
-	    }
-
-	    pagerAdapter = new BibliaPagerAdapter(fragmentManager, fragments);
-		pagerAdapter.notifyDataSetChanged();
-		mViewPager.setAdapter(pagerAdapter);
-
 	    ActionBar.TabListener tabListener = new ActionBar.TabListener() {
 	        public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
 	        	mViewPager.setCurrentItem(tab.getPosition());
@@ -268,14 +238,22 @@ public class BibliaActivity extends ActionBarActivity {
 	    
 	    getSupportActionBar().removeAllTabs();
 	    
-	    // Add 3 tabs, specifying the tab's text and TabListener
-	    for (int i = 0; i < Biblia.getQuantidadeCapitulos(livros[position]); i++) {
-	    	
+	    int qtdCapitulos = Biblia.getQuantidadeCapitulos(livros[position]);
+	    for (int i = 0; i < qtdCapitulos; i++) {
+	    	BibliaFragment fragment = (BibliaFragment) BibliaFragment.instantiate(BibliaActivity.this, BibliaFragment.class.getName());
+    		fragment.setCapitulo((i+1));
+    		fragment.setLivro(livros[position]);
+//    		fragment.setVersiculos(mapBiblia.get(i));
+        	fragments.add(fragment);
+        	
 	    	getSupportActionBar().addTab(getSupportActionBar().newTab()
-	                        .setText(" - " + (i + 1) + " - ")
-	                        .setTabListener(tabListener), i, ((i)==capitulo?true : false));
+                    .setText(" - " + (i + 1) + " - ")
+                    .setTabListener(tabListener), i, ((i)==capitulo?true : false));
 	    }
-	    
+
+	    pagerAdapter = new BibliaPagerAdapter(fragmentManager, fragments);
+		pagerAdapter.notifyDataSetChanged();
+		mViewPager.setAdapter(pagerAdapter);
 	}
 
 	@Override

@@ -23,7 +23,8 @@
             android:gravity="center"
             android:textSize="30sp"
             android:textStyle="bold" 
-            android:textIsSelectable="true"/>
+            android:textIsSelectable="true"
+            android:visibility="gone"/>
 
     </LinearLayout>
 
