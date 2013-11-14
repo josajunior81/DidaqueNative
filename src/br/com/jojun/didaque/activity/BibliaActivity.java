@@ -288,8 +288,8 @@ public class BibliaActivity extends ActionBarActivity {
 	    MenuItem item = menu.findItem(R.id.action_compartilhar);
 
 	    // Fetch and store ShareActionProvider
-	    mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
-	    mShareActionProvider.setShareIntent(compartilhar());
+//	    mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+//	    mShareActionProvider.setShareIntent(compartilhar());
 		return true;
 	}
 	

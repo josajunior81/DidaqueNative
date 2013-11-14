@@ -9,14 +9,14 @@
     
     <item
         android:id="@+id/action_compartilhar"
-        didaque:showAsAction="ifRoom|collapseActionView"
+        didaque:showAsAction="collapseActionView"
         android:title="@string/action_compartilhar"
         android:icon="@drawable/ic_action_share"
         didaque:actionProviderClass="android.support.v7.widget.ShareActionProvider"/>
     
         <item
 	        android:id="@+id/action_setup"
-	        didaque:showAsAction="ifRoom|collapseActionView"
+	        didaque:showAsAction="collapseActionView"
 	        android:title="@string/action_setup"
 	        android:icon="@drawable/ic_action_settings"/>
         
