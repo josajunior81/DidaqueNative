@@ -1,9 +1,7 @@
 package br.com.jojun.didaque.activity;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +15,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.view.ActionMode;
 import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.ShareActionProvider.OnShareTargetSelectedListener;
 import android.text.ClipboardManager;
@@ -59,6 +58,7 @@ public class BibliaActivity extends ActionBarActivity {
 	private static final int RESULT_SETTINGS = 1;
 	private int capitulo;
 	private String nomeLivro;
+	private int qtdCapitulos;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -221,8 +221,26 @@ public class BibliaActivity extends ActionBarActivity {
 	        	mViewPager.setCurrentItem(tab.getPosition());
 	        	capitulo = tab.getPosition();
 	        	
-				fragmentAtual = new BibliaFragment();
-	    		ft.replace(R.id.content_frame_biblia, fragmentAtual);
+//				fragmentAtual = new BibliaFragment();
+//	    		ft.replace(R.id.content_frame_biblia, fragmentAtual);
+
+//	        	fragments = new ArrayList<BibliaFragment>();
+//	    	    qtdCapitulos = Biblia.getQuantidadeCapitulos(nomeLivro);
+//	    	    for (int i = 0; i < qtdCapitulos; i++) {
+//	    	    	int ini = 0, fim = 3;
+//	    	    	if(i > 0) {
+//	    	    		ini = i-1;
+//	    	    		fim = ini+2;
+//	    	    	}
+//	    	    	if(ini < fim) {
+//	    		    	BibliaFragment fragment = (BibliaFragment) BibliaFragment.instantiate(BibliaActivity.this, BibliaFragment.class.getName());
+//	    	    		fragment.setCapitulo((i+1));
+//	    	    		fragment.setLivro(nomeLivro);
+//	    	    		fragment.setVersiculos(nomeLivro, (i+1));
+//	    	        	fragments.add(fragment);
+//	    	    	}
+//	    	    }
+	        	
 	    		if(mShareActionProvider != null)
 	    			mShareActionProvider.setShareIntent(compartilhar());
 	    	}
@@ -238,14 +256,13 @@ public class BibliaActivity extends ActionBarActivity {
 	    
 	    getSupportActionBar().removeAllTabs();
 	    
-	    int qtdCapitulos = Biblia.getQuantidadeCapitulos(livros[position]);
+	    qtdCapitulos = Biblia.getQuantidadeCapitulos(livros[position]);
 	    for (int i = 0; i < qtdCapitulos; i++) {
 	    	BibliaFragment fragment = (BibliaFragment) BibliaFragment.instantiate(BibliaActivity.this, BibliaFragment.class.getName());
     		fragment.setCapitulo((i+1));
     		fragment.setLivro(livros[position]);
-//    		fragment.setVersiculos(mapBiblia.get(i));
+//    		fragment.setVersiculos(livros[position], (i+1));
         	fragments.add(fragment);
-        	
 	    	getSupportActionBar().addTab(getSupportActionBar().newTab()
                     .setText(" - " + (i + 1) + " - ")
                     .setTabListener(tabListener), i, ((i)==capitulo?true : false));
@@ -265,7 +282,7 @@ public class BibliaActivity extends ActionBarActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.dashboard, menu);
+		getMenuInflater().inflate(R.menu.biblia_menu, menu);
 		
 		// Locate MenuItem with ShareActionProvider
 	    MenuItem item = menu.findItem(R.id.action_compartilhar);

@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:didaque="http://schemas.android.com/apk/res-auto" >
+
+    <item
+        android:id="@+id/action_favarito"
+        android:icon="@drawable/ic_action_favorite"
+        android:title="@string/action_favorito"
+        didaque:showAsAction="always"/>
+    <item
+        android:id="@+id/action_copiar"
+        android:icon="@drawable/ic_action_copy"
+        android:title="@string/action_copiar"
+        didaque:showAsAction="ifRoom|collapseActionView"/>
+    <item
+        android:id="@+id/action_compartilhar"
+        android:icon="@drawable/ic_action_share"
+        android:title="@string/action_compartilhar"
+        didaque:actionProviderClass="android.support.v7.widget.ShareActionProvider"
+        didaque:showAsAction="ifRoom|collapseActionView"/>
+
+</menu>

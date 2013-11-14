@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="titulo_tela_selecionado">#29456E</color>
+    <color name="label_titulos_avaliacao">#367197</color>
+    <color name="label_descricao_avaliacao">#000000</color>
+    <color name="label_titulos_restituicao">#154874</color>
+    <color name="label_descricao_restituicao">#000000</color>
+    <color name="dashboard_item_clicked">#80FFFFFF</color>
+    <color name="pergunta_atual">#21467A</color>
+    <color name="pergunta_respondida">#96999E</color>
+    <color name="complemento_pergunta">#21467A</color>
+    <color name="radio_buttons_pergunta_atual">#21467A</color>
+    <color name="radio_buttons_pergunta_respondida">#96999E</color>
+    <color name="background_pergunta_atual">#80FFFFFF</color>
+    <color name="background_info_video">#3A577C</color>
+    <color name="label_quiz_perguntas">#154874</color>
+    <color name="label_quiz_respostas">#000000</color>
+    <color name="action_bar_line_color">#33b5e5</color>
+    <color name="label_perguntas">#154874</color>
+    <color name="background_datahoralocal">#90000000</color>
+    <color name="textview_datahoralocal">#FFFFFF</color>
+    
+    <color name="label_consulta_cnpj">#7ba4dc</color>
+    <color name="label_consulta_cnpj_sombra">#000000</color>
+    
+    <color name="light_grey_background">#C0C0C0</color>
+    <color name="background_green">#8acc97</color>
+    
+    <color name="holo_light_background">#ffe8e8e8</color>
+    <color name="holo_light_selected">#ff7cc9e5</color>
+</resources>

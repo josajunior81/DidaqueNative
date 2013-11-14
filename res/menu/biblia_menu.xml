@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:didaque="http://schemas.android.com/apk/res-auto" >
+
+    <item
+        android:id="@+id/action_buscar"
+        didaque:showAsAction="always"
+        android:title="@string/action_buscar"
+        android:icon="@drawable/ic_action_search"/>
+                
+
+</menu>
