@@ -15,7 +15,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.view.ActionMode;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.ShareActionProvider.OnShareTargetSelectedListener;
 import android.text.ClipboardManager;
@@ -283,13 +283,8 @@ public class BibliaActivity extends ActionBarActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.biblia_menu, menu);
-		
-		// Locate MenuItem with ShareActionProvider
-	    MenuItem item = menu.findItem(R.id.action_compartilhar);
-
-	    // Fetch and store ShareActionProvider
-//	    mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
-//	    mShareActionProvider.setShareIntent(compartilhar());
+		MenuItem searchItem = menu.findItem(R.id.action_buscar);
+	    SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
 		return true;
 	}
 	
