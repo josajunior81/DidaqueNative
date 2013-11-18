@@ -5,7 +5,7 @@
         android:id="@+id/action_biblia"
         didaque:showAsAction="always"
         android:title="@string/action_setup"
-        android:icon="@drawable/ic_launcher"/>
+        android:icon="@drawable/bible_icon"/>
     
     <item
         android:id="@+id/action_compartilhar"
@@ -19,8 +19,6 @@
 	        didaque:showAsAction="collapseActionView"
 	        android:title="@string/action_setup"
 	        android:icon="@drawable/ic_action_settings"/>
-        
-
         
         <!--item
         android:id="@+id/action_links"

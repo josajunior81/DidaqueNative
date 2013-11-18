@@ -14,12 +14,6 @@
             android:id="@+id/content_frame_biblia"
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
-
-            <!--fragment
-                android:id="@+id/fragment_biblia"
-                android:name="br.com.jojun.didaque.fragment.BibliaFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/-->
             
         </FrameLayout>
 
