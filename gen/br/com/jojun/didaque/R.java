@@ -18,8 +18,10 @@ public final class R {
     }
     public static final class array {
         public static final int array_apostilas=0x7f0d0000;
+        public static final int array_biblias=0x7f0d0004;
         public static final int idiomas=0x7f0d0001;
         public static final int idiomasValores=0x7f0d0002;
+        public static final int main_nav_items=0x7f0d0003;
     }
     public static final class attr {
         /**  Custom divider drawable to use for elements in the action bar. 
@@ -1044,16 +1046,16 @@ containing a value of this type.
         public static final int action_bar_root=0x7f06001a;
         public static final int action_bar_subtitle=0x7f060023;
         public static final int action_bar_title=0x7f060022;
-        public static final int action_biblia=0x7f060057;
-        public static final int action_buscar=0x7f060053;
-        public static final int action_compartilhar=0x7f060056;
+        public static final int action_biblia=0x7f060058;
+        public static final int action_buscar=0x7f060054;
+        public static final int action_compartilhar=0x7f060057;
         public static final int action_context_bar=0x7f06001d;
-        public static final int action_copiar=0x7f060055;
-        public static final int action_favarito=0x7f060054;
+        public static final int action_copiar=0x7f060056;
+        public static final int action_favarito=0x7f060055;
         public static final int action_menu_divider=0x7f060016;
         public static final int action_menu_presenter=0x7f060017;
         public static final int action_mode_close_button=0x7f060024;
-        public static final int action_setup=0x7f060058;
+        public static final int action_setup=0x7f060059;
         public static final int activity_chooser_view_content=0x7f060025;
         public static final int ad=0x7f060047;
         public static final int ad_biblia=0x7f060040;
@@ -1070,6 +1072,7 @@ containing a value of this type.
         public static final int divider_biblia=0x7f06003f;
         public static final int drawer_layout=0x7f060042;
         public static final int drawer_layout_biblia=0x7f06003c;
+        public static final int drawer_view=0x7f060048;
         public static final int dropdown=0x7f06000f;
         public static final int edit_query=0x7f060030;
         public static final int end=0x7f060013;
@@ -1081,23 +1084,23 @@ containing a value of this type.
         public static final int icon=0x7f06002a;
         public static final int ifRoom=0x7f06000a;
         public static final int image=0x7f060027;
-        public static final int left_drawer=0x7f060048;
+        public static final int left_drawer=0x7f060049;
         public static final int left_drawer_biblia=0x7f060041;
-        public static final int linear_layout_textos=0x7f060049;
+        public static final int linear_layout_textos=0x7f06004a;
         public static final int listMode=0x7f060001;
         public static final int list_item=0x7f060029;
-        public static final int list_versiculos=0x7f06004c;
+        public static final int list_versiculos=0x7f06004d;
         public static final int middle=0x7f060012;
         public static final int never=0x7f060009;
         public static final int none=0x7f060010;
         public static final int normal=0x7f060000;
         public static final int pager=0x7f060045;
         public static final int pager_biblia=0x7f06003e;
-        public static final int pager_title_strip=0x7f060052;
+        public static final int pager_title_strip=0x7f060053;
         public static final int progress_circular=0x7f060018;
         public static final int progress_horizontal=0x7f060019;
         public static final int radio=0x7f06002f;
-        public static final int scroll_view_licao=0x7f06004d;
+        public static final int scroll_view_licao=0x7f06004e;
         public static final int search_badge=0x7f060032;
         public static final int search_bar=0x7f060031;
         public static final int search_button=0x7f060033;
@@ -1117,14 +1120,14 @@ containing a value of this type.
         public static final int tabMode=0x7f060002;
         public static final int title=0x7f06002b;
         public static final int top_action_bar=0x7f060020;
-        public static final int tv_licao_catequese=0x7f06004f;
-        public static final int tv_licao_titulo=0x7f06004e;
-        public static final int tv_textos_licao=0x7f06004a;
-        public static final int tv_textos_texto=0x7f06004b;
+        public static final int tv_licao_catequese=0x7f060050;
+        public static final int tv_licao_titulo=0x7f06004f;
+        public static final int tv_textos_licao=0x7f06004b;
+        public static final int tv_textos_texto=0x7f06004c;
         public static final int up=0x7f060021;
         public static final int useLogo=0x7f060003;
-        public static final int versiculo_numero=0x7f060050;
-        public static final int versiculo_texto=0x7f060051;
+        public static final int versiculo_numero=0x7f060051;
+        public static final int versiculo_texto=0x7f060052;
         public static final int withText=0x7f06000c;
     }
     public static final class integer {

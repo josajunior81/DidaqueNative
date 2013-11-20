@@ -28,11 +28,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import br.com.jojun.didaque.DidaqueApplication;
 import br.com.jojun.didaque.R;
+import br.com.jojun.didaque.adapter.ExpandableDrawerAdapter;
 import br.com.jojun.didaque.adapter.LicaoPagerAdapter;
 import br.com.jojun.didaque.bean.Apostila;
 import br.com.jojun.didaque.fragment.LicaoFragment;
@@ -67,6 +70,9 @@ public class DefaultActivity extends ActionBarActivity {
 	private ClipboardManager clipboard;
 	private ArrayAdapter<String> drawerAdapter;
 	private static final int RESULT_SETTINGS = 1;
+	
+//	private ExpandableListView mDrawerExpandableList;
+//	private ExpandableDrawerAdapter mDrawerAdapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -109,12 +115,18 @@ public class DefaultActivity extends ActionBarActivity {
 	    
 		apostilas = getResources().getStringArray(R.array.array_apostilas);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        mDrawerExpandableList = (ExpandableListView) findViewById(R.id.left_drawer);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        
 
         // Set the adapter for the list view
         drawerAdapter = new ArrayAdapter<String>(this, R.layout.adapter_list_apostila, apostilas);
         mDrawerList.setAdapter(drawerAdapter);
         drawerAdapter.notifyDataSetChanged();
+        
+//        mDrawerAdapter = new ExpandableDrawerAdapter(this);
+//        mDrawerExpandableList.setAdapter(mDrawerAdapter);
+//        mDrawerExpandableList.setOnGroupClickListener(new DrawerGroupClickListener());
         
         // Set the list's click listener
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
@@ -354,6 +366,16 @@ public class DefaultActivity extends ActionBarActivity {
         
     }
 	
+	protected class DrawerGroupClickListener implements OnGroupClickListener {
+
+		@Override
+		public boolean onGroupClick(ExpandableListView parent, View v,
+				int groupPosition, long id) {
+			return false;
+		}
+	    
+	}
+    
 	protected class DrawerItemClickListener implements ListView.OnItemClickListener {
 	    @SuppressWarnings("rawtypes")
 		@Override
