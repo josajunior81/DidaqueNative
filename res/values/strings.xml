@@ -2,6 +2,10 @@
 <resources>
 
     <string name="app_name">Didaquê</string>
+    <string name="apostilas">Apostilas</string>
+    <string name="biblias">Bílias</string>
+    <string name="biblia_pt">Almeida Recebida</string>
+    <string name="biblia_es">Reina-Valera</string>
     <string name="activity_config">Configurações</string>
     <string name="action_compartilhar">Compartilhar</string>
     <string name="action_setup">Configurações</string>
@@ -18,4 +22,9 @@
 	<string name="app_id">629041497135453</string>
 	<string name="prefTituloIdiomas">Selecione seu Idioma</string>
 	<string name="prefIdiomaPadrao">Português</string>
+	
+	<string name="justificativa_ar">
+	    A Almeida Recebida é de domínio público, e constitui uma versão da Bíblia portuguesa, traduzida por João Ferreira de Almeida, mas que segue os manuscritos gregos do Textus Receptus, isto é, os manuscritos utilizados pelos Reformadores Protestantes, bem como pelos Valdenses, e também quase todas as Bíblias antigas (incluindo a tradução original de João Ferreira de Almeida).\n
+	    Mais informações em: http://www.almeidarecebida.org/
+	</string>
 </resources>

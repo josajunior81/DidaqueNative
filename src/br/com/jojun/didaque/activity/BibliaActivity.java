@@ -19,13 +19,17 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.ShareActionProvider.OnShareTargetSelectedListener;
 import android.text.ClipboardManager;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import br.com.jojun.didaque.R;
 import br.com.jojun.didaque.adapter.BibliaPagerAdapter;
@@ -59,6 +63,7 @@ public class BibliaActivity extends ActionBarActivity {
 	private int capitulo;
 	private String nomeLivro;
 	private int qtdCapitulos;
+	private LinearLayout layoutJustificativa;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +73,17 @@ public class BibliaActivity extends ActionBarActivity {
 		initActivity(savedInstanceState);
         
 	    mAdView = (AdView)findViewById(R.id.ad_biblia);
+	    layoutJustificativa = (LinearLayout)findViewById(R.id.linear_justificativa);
+	    TextView tvAR = (TextView)findViewById(R.id.tv_justificativa_ar);
+	    tvAR.setText(Html.fromHtml(
+	    		"A Almeida Recebida é de domínio público, e constitui uma versão da Bíblia portuguesa, " +
+	    		"traduzida por João Ferreira de Almeida, mas que segue os manuscritos gregos do Textus Receptus, " +
+	    		"isto é, os manuscritos utilizados pelos Reformadores Protestantes, bem como pelos Valdenses, e também " +
+	    		"quase todas as Bíblias antigas (incluindo a tradução original de João Ferreira de Almeida).<br /><br />" +
+	    		"Mais informações em: <a href=http://www.almeidarecebida.org/>Bíblia Almeida Recebida (AR)</a>"));
+	    tvAR.setMovementMethod(LinkMovementMethod.getInstance());
+	    
+	    
 	    mAdView.setAdListener(new MyAdListener());
 
 	    AdRequest adRequest = new AdRequest();
@@ -201,6 +217,7 @@ public class BibliaActivity extends ActionBarActivity {
 	
 	/** Swaps fragments in the main content view */
 	protected void selectItem(int position) {
+		layoutJustificativa.setVisibility(View.GONE);
 		
 		if(nomeLivro != null && !nomeLivro.equalsIgnoreCase(livros[position]))
 			capitulo = 0;

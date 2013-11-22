@@ -16,7 +16,36 @@
             android:layout_height="match_parent" >
             
         </FrameLayout>
-
+	    <LinearLayout
+	        android:id="@+id/linear_justificativa"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="15dp"
+	        android:layout_marginRight="15dp"
+			android:paddingTop="10dp"
+			android:paddingBottom="10dp"
+	        android:gravity="center_vertical|center_horizontal"
+	        android:orientation="vertical" >
+	
+	        <TextView
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:gravity="center"
+	            android:textSize="30sp"
+	            android:textStyle="bold" 
+	            android:textIsSelectable="true"
+	            android:text="@string/biblia_pt"/>
+	
+	        <TextView
+	            android:id="@+id/tv_justificativa_ar"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:gravity="center_horizontal|center_vertical"
+	            android:paddingTop="15dp"
+	            android:textSize="16sp"
+	            android:textIsSelectable="true"
+	            android:text="@string/justificativa_ar" />
+	    </LinearLayout>
         <android.support.v4.view.ViewPager
             android:id="@+id/pager_biblia"
             android:layout_width="match_parent"

@@ -53,23 +53,14 @@
     </RelativeLayout>
 
     <!-- The navigation drawer -->
-	<LinearLayout
-	    android:id="@+id/drawer_view"
-	    android:layout_width="240dp"
-	    android:layout_height="match_parent"
-	    android:layout_gravity="start"
-	    android:background="#303030"
-	    >
-	
-	    
-	    <!-- Use any Views you like -->
 	    <ListView
 	        android:id="@+id/left_drawer"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
+	        android:layout_width="240dp"
+	        android:layout_height="match_parent"
+	        android:layout_gravity="start"
 	        android:choiceMode="singleChoice"
-	        android:divider="@android:color/transparent"
-	        android:dividerHeight="0.5dp"/>
-	</LinearLayout>
+	        android:divider="#FFF"
+	        android:dividerHeight="0.5dp"
+	        android:background="#484848"/>
 
 </android.support.v4.widget.DrawerLayout>

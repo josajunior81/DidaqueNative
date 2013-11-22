@@ -9,7 +9,7 @@
     
     <item
         android:id="@+id/action_compartilhar"
-        didaque:showAsAction="collapseActionView"
+        didaque:showAsAction="never"
         android:title="@string/action_compartilhar"
         android:icon="@drawable/ic_action_share"
         didaque:actionProviderClass="android.support.v7.widget.ShareActionProvider"/>

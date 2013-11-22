@@ -35,7 +35,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import br.com.jojun.didaque.DidaqueApplication;
 import br.com.jojun.didaque.R;
-import br.com.jojun.didaque.adapter.ExpandableDrawerAdapter;
 import br.com.jojun.didaque.adapter.LicaoPagerAdapter;
 import br.com.jojun.didaque.bean.Apostila;
 import br.com.jojun.didaque.fragment.LicaoFragment;
@@ -117,6 +116,8 @@ public class DefaultActivity extends ActionBarActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 //        mDrawerExpandableList = (ExpandableListView) findViewById(R.id.left_drawer);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
+//        View header = getLayoutInflater().inflate(R.layout.listvew_header, null);
+//        mDrawerList.addHeaderView(header);
         
 
         // Set the adapter for the list view
