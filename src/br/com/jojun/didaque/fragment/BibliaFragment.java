@@ -70,6 +70,14 @@ public class BibliaFragment extends Fragment {
 		});
     }
 
+    public void goToVersiculo(int versiculo){
+    	if(versiculos != null) {
+	    	versiculos.setSelection(versiculo);
+	    	versiculos.setItemChecked(versiculo, true);
+	    	versiculos.setSelected(true);
+    	}
+    }
+    
 	public void setVersiculos(String livro, int capitulo) {
 		alBiblia = Biblia.getVersiculos(livro, capitulo);
 	}

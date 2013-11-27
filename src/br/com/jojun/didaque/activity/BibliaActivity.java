@@ -1,8 +1,10 @@
 package br.com.jojun.didaque.activity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -21,6 +23,7 @@ import android.support.v7.widget.ShareActionProvider.OnShareTargetSelectedListen
 import android.text.ClipboardManager;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -42,7 +45,7 @@ import com.google.ads.AdView;
 import com.google.analytics.tracking.android.EasyTracker;
 
 @SuppressWarnings("deprecation")
-public class BibliaActivity extends ActionBarActivity {
+public class BibliaActivity extends ActionBarActivity implements SearchView.OnQueryTextListener {
 	private String[] livros;
     protected DrawerLayout mDrawerLayout;
     protected ListView mDrawerList;
@@ -64,7 +67,8 @@ public class BibliaActivity extends ActionBarActivity {
 	private String nomeLivro;
 	private int qtdCapitulos;
 	private LinearLayout layoutJustificativa;
-	
+	MenuItem searchItem;
+    SearchView searchView;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -89,6 +93,30 @@ public class BibliaActivity extends ActionBarActivity {
 	    AdRequest adRequest = new AdRequest();
 	    adRequest.addKeyword("sporting goods");
 	    mAdView.loadAd(adRequest);
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode,  Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		if(resultCode == RESULT_OK){
+			
+			MenuItemCompat.collapseActionView(searchItem);
+			searchView.setQuery("", false);
+			
+			
+			Log.i("BA", data.toString());
+			Biblia biblia = (Biblia)data.getSerializableExtra("biblia");
+			capitulo = biblia.capitulo-1;
+			nomeLivro = biblia.livro;
+			selectItem(Arrays.asList(livros).indexOf(nomeLivro), capitulo, biblia.versiculo);
+//			mDrawerList.setSelection(Arrays.binarySearch(livros, nomeLivro));
+			getSupportActionBar().setSelectedNavigationItem(capitulo);
+			BibliaFragment fragment = pagerAdapter.getItem(capitulo);
+			fragment.goToVersiculo(biblia.versiculo-1);
+			
+		}
+		
 	}
 
 	private void initActivity(Bundle savedInstanceState) {
@@ -211,16 +239,19 @@ public class BibliaActivity extends ActionBarActivity {
 	    @SuppressWarnings("rawtypes")
 		@Override
 	    public void onItemClick(AdapterView parent, View view, int position, long id) {
-	        selectItem(position);
+	        selectItem(position, 0, 1);
 	    }
 	}
 	
 	/** Swaps fragments in the main content view */
-	protected void selectItem(int position) {
+	protected void selectItem(int position, int cap, int versiculo) {
 		layoutJustificativa.setVisibility(View.GONE);
 		
 		if(nomeLivro != null && !nomeLivro.equalsIgnoreCase(livros[position]))
-			capitulo = 0;
+			if(cap > 0)
+				capitulo = cap;
+			else
+				capitulo = 0;
 		
 		nomeLivro = livros[position];
 
@@ -300,8 +331,21 @@ public class BibliaActivity extends ActionBarActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.biblia_menu, menu);
-		MenuItem searchItem = menu.findItem(R.id.action_buscar);
-	    SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+		searchItem = menu.findItem(R.id.action_buscar);
+	    searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+	 // Associate searchable configuration with the SearchView
+	    SearchManager searchManager =  (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+	    searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+	    searchView.setOnQueryTextListener(this);
+//	    searchView.setOnSearchClickListener( new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				MenuItemCompat.collapseActionView(searchItem);
+//                searchView.setQuery("", false);
+//			}
+//		});
+	    
 		return true;
 	}
 	
@@ -333,4 +377,25 @@ public class BibliaActivity extends ActionBarActivity {
 //    	mShareActionProvider.setShareIntent(shareIntent);
     	return shareIntent;
 	}
+    
+    public boolean onQueryTextChange(String newText) {
+//        Log.i("BA", "Query = " + newText);
+        return false;
+    }
+ 
+    public boolean onQueryTextSubmit(String query) {
+//        Log.i("BA", "Query = " + query + " : submitted");
+        Intent intent = new Intent(Intent.ACTION_SEARCH, null, this, SearchableActivity.class);
+        intent.putExtra("query", query);
+        startActivityForResult(intent, 1);
+        return false;
+    }
+ 
+    public boolean onClose() {
+        return false;
+    }
+ 
+    protected boolean isAlwaysExpanded() {
+        return false;
+    }
 }

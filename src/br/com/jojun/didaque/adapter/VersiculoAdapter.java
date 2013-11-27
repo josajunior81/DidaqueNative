@@ -27,7 +27,6 @@ public class VersiculoAdapter extends BaseAdapter {
 		this.checkedItems = new HashSet<Integer>();
 	}
 	
-	
 	public void enterMultiMode(){
         this.multiMode = true;
         this.notifyDataSetChanged();
