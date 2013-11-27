@@ -28,6 +28,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
@@ -100,9 +101,11 @@ public class BibliaActivity extends ActionBarActivity implements SearchView.OnQu
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
 		if(resultCode == RESULT_OK){
-			
+			BibliaActivity.this.getCurrentFocus().clearFocus();
 			MenuItemCompat.collapseActionView(searchItem);
-			searchView.setQuery("", false);
+//			searchView.setQuery("", false);
+			InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+			imm.hideSoftInputFromWindow(searchView.getWindowToken(), 0);
 			
 			
 			Log.i("BA", data.toString());
