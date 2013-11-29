@@ -807,7 +807,7 @@ containing a value of this type.
         public static final int ga_reportUncaughtExceptions=0x7f070007;
     }
     public static final class color {
-        public static final int abc_search_url_text_holo=0x7f08001e;
+        public static final int abc_search_url_text_holo=0x7f08001f;
         public static final int abc_search_url_text_normal=0x7f080000;
         public static final int abc_search_url_text_pressed=0x7f080002;
         public static final int abc_search_url_text_selected=0x7f080001;
@@ -838,6 +838,7 @@ containing a value of this type.
         public static final int radio_buttons_pergunta_respondida=0x7f08000d;
         public static final int textview_datahoralocal=0x7f080015;
         public static final int titulo_tela_selecionado=0x7f080003;
+        public static final int vinho=0x7f08001e;
     }
     public static final class dimen {
         /**  Default height of an action bar. 
@@ -1025,18 +1026,19 @@ containing a value of this type.
         public static final int background_border_blue=0x7f020058;
         public static final int bible_icon=0x7f020059;
         public static final int drawer_shadow=0x7f02005a;
-        public static final int ic_action_about=0x7f02005b;
-        public static final int ic_action_copy=0x7f02005c;
-        public static final int ic_action_favorite=0x7f02005d;
-        public static final int ic_action_overflow=0x7f02005e;
-        public static final int ic_action_search=0x7f02005f;
-        public static final int ic_action_settings=0x7f020060;
-        public static final int ic_action_share=0x7f020061;
-        public static final int ic_action_web_site=0x7f020062;
-        public static final int ic_drawer=0x7f020063;
-        public static final int ic_launcher=0x7f020064;
-        public static final int selector_list=0x7f020065;
-        public static final int selector_list_multimode=0x7f020066;
+        public static final int highlight_list=0x7f02005b;
+        public static final int ic_action_about=0x7f02005c;
+        public static final int ic_action_copy=0x7f02005d;
+        public static final int ic_action_favorite=0x7f02005e;
+        public static final int ic_action_overflow=0x7f02005f;
+        public static final int ic_action_search=0x7f020060;
+        public static final int ic_action_settings=0x7f020061;
+        public static final int ic_action_share=0x7f020062;
+        public static final int ic_action_web_site=0x7f020063;
+        public static final int ic_drawer=0x7f020064;
+        public static final int ic_launcher=0x7f020065;
+        public static final int selector_list=0x7f020066;
+        public static final int selector_list_multimode=0x7f020067;
     }
     public static final class id {
         public static final int action_bar=0x7f06001c;
@@ -1048,14 +1050,15 @@ containing a value of this type.
         public static final int action_bar_title=0x7f060022;
         public static final int action_biblia=0x7f06005c;
         public static final int action_buscar=0x7f060058;
-        public static final int action_compartilhar=0x7f06005b;
+        public static final int action_compartilhar=0x7f06005d;
         public static final int action_context_bar=0x7f06001d;
-        public static final int action_copiar=0x7f06005a;
-        public static final int action_favarito=0x7f060059;
+        public static final int action_context_compartilhar=0x7f06005b;
+        public static final int action_context_copiar=0x7f06005a;
+        public static final int action_context_favarito=0x7f060059;
         public static final int action_menu_divider=0x7f060016;
         public static final int action_menu_presenter=0x7f060017;
         public static final int action_mode_close_button=0x7f060024;
-        public static final int action_setup=0x7f06005d;
+        public static final int action_setup=0x7f06005e;
         public static final int activity_chooser_view_content=0x7f060025;
         public static final int ad=0x7f060049;
         public static final int ad_biblia=0x7f060042;

@@ -112,14 +112,15 @@ public class BibliaActivity extends ActionBarActivity implements SearchView.OnQu
 			Biblia biblia = (Biblia)data.getSerializableExtra("biblia");
 			capitulo = biblia.capitulo-1;
 			nomeLivro = biblia.livro;
-			selectItem(Arrays.asList(livros).indexOf(nomeLivro), capitulo, biblia.versiculo);
+			int posLivro = Arrays.asList(livros).indexOf(nomeLivro);
+			selectItem(posLivro, capitulo, biblia.versiculo);
 //			mDrawerList.setSelection(Arrays.binarySearch(livros, nomeLivro));
-			getSupportActionBar().setSelectedNavigationItem(capitulo);
+//			getSupportActionBar().setSelectedNavigationItem(capitulo);
+			mViewPager.setCurrentItem(capitulo, true);
 			BibliaFragment fragment = pagerAdapter.getItem(capitulo);
 			fragment.goToVersiculo(biblia.versiculo-1);
-			
+			mDrawerList.setSelection(posLivro);
 		}
-		
 	}
 
 	private void initActivity(Bundle savedInstanceState) {

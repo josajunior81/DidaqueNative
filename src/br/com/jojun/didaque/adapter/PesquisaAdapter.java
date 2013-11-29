@@ -8,11 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.SectionIndexer;
 import android.widget.TextView;
 import br.com.jojun.didaque.R;
 import br.com.jojun.didaque.bean.Biblia;
 
-public class PesquisaAdapter extends BaseAdapter {
+public class PesquisaAdapter extends BaseAdapter implements SectionIndexer {
 	private List<Biblia> list = Collections.emptyList();
 	private LayoutInflater inflater;
 	
@@ -51,6 +52,21 @@ public class PesquisaAdapter extends BaseAdapter {
 		tvTexto.setText(b.texto);
 		
 		return view;
+	}
+	@Override
+	public int getPositionForSection(int sectionIndex) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public int getSectionForPosition(int position) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public Object[] getSections() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
