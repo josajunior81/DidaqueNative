@@ -93,4 +93,34 @@ public class Biblia implements Serializable{
 		db.close();
 		return versiculos;
 	}
+
+	public static boolean salvarTextoFavorito(String livro, String texto) {
+		boolean retorno = true;
+		SQLiteDatabase db = DBHelper.getInstance().getReadableDatabase();
+		Cursor cursor = db.query("favoritos",
+                new String[] { "livro, texto"}, "livro = '"+livro+"' AND texto = '"+texto+"' ", null, null, null, null);
+		if(cursor.getCount() > 0)
+			retorno = false;
+		else 
+			db.execSQL("INSERT INTO favoritos (livro, texto) VALUES ('"+livro+"', texto = '"+texto+"') ");
+		cursor.close();
+		db.close();
+		return retorno;
+	}
+
+	public static List<Biblia> favoritos() {
+		List<Biblia> favoritos = new ArrayList<Biblia>();
+		SQLiteDatabase db = DBHelper.getInstance().getReadableDatabase();
+		Cursor cursor = db.query("favoritos ",
+                new String[] { "livro, texto"}, null, null, null, null, null);
+		while(cursor.moveToNext()) {
+			Biblia b = new Biblia();
+			b.livro = cursor.getString(0);
+			b.texto = cursor.getString(1);
+			favoritos.add(b);
+		}	  
+		cursor.close();
+		db.close();
+		return favoritos;
+	}
 }

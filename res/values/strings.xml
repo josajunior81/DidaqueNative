@@ -23,6 +23,7 @@
 	<string name="prefTituloIdiomas">Selecione seu Idioma</string>
 	<string name="prefIdiomaPadrao">Português</string>
 	<string name="search_hint">Pesquisar</string>
+	<string name="send_to">Enviar para</string>
 	
 	<string name="justificativa_ar">
 	    A Almeida Recebida é de domínio público, e constitui uma versão da Bíblia portuguesa, traduzida por João Ferreira de Almeida, mas que segue os manuscritos gregos do Textus Receptus, isto é, os manuscritos utilizados pelos Reformadores Protestantes, bem como pelos Valdenses, e também quase todas as Bíblias antigas (incluindo a tradução original de João Ferreira de Almeida).\n

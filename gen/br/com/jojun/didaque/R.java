@@ -18,10 +18,8 @@ public final class R {
     }
     public static final class array {
         public static final int array_apostilas=0x7f0d0000;
-        public static final int array_biblias=0x7f0d0004;
         public static final int idiomas=0x7f0d0001;
         public static final int idiomasValores=0x7f0d0002;
-        public static final int main_nav_items=0x7f0d0003;
     }
     public static final class attr {
         /**  Custom divider drawable to use for elements in the action bar. 
@@ -1048,17 +1046,16 @@ containing a value of this type.
         public static final int action_bar_root=0x7f06001a;
         public static final int action_bar_subtitle=0x7f060023;
         public static final int action_bar_title=0x7f060022;
-        public static final int action_biblia=0x7f06005c;
-        public static final int action_buscar=0x7f060058;
-        public static final int action_compartilhar=0x7f06005d;
+        public static final int action_biblia=0x7f06005d;
+        public static final int action_buscar=0x7f06005a;
+        public static final int action_compartilhar=0x7f06005e;
         public static final int action_context_bar=0x7f06001d;
-        public static final int action_context_compartilhar=0x7f06005b;
-        public static final int action_context_copiar=0x7f06005a;
-        public static final int action_context_favarito=0x7f060059;
+        public static final int action_context_compartilhar=0x7f06005c;
+        public static final int action_context_copiar=0x7f06005b;
         public static final int action_menu_divider=0x7f060016;
         public static final int action_menu_presenter=0x7f060017;
         public static final int action_mode_close_button=0x7f060024;
-        public static final int action_setup=0x7f06005e;
+        public static final int action_setup=0x7f06005f;
         public static final int activity_chooser_view_content=0x7f060025;
         public static final int ad=0x7f060049;
         public static final int ad_biblia=0x7f060042;
@@ -1099,7 +1096,7 @@ containing a value of this type.
         public static final int normal=0x7f060000;
         public static final int pager=0x7f060047;
         public static final int pager_biblia=0x7f060040;
-        public static final int pager_title_strip=0x7f060057;
+        public static final int pager_title_strip=0x7f060059;
         public static final int progress_circular=0x7f060018;
         public static final int progress_horizontal=0x7f060019;
         public static final int radio=0x7f06002f;
@@ -1124,17 +1121,19 @@ containing a value of this type.
         public static final int title=0x7f06002b;
         public static final int titulo_apostilas=0x7f060052;
         public static final int top_action_bar=0x7f060020;
+        public static final int tv_favorito_livro=0x7f060053;
+        public static final int tv_favorito_texto=0x7f060054;
         public static final int tv_justificativa_ar=0x7f06003f;
         public static final int tv_licao_catequese=0x7f060051;
         public static final int tv_licao_titulo=0x7f060050;
-        public static final int tv_pesquisa_versiculo_numero=0x7f060053;
-        public static final int tv_pesquisa_versiculo_texto=0x7f060054;
+        public static final int tv_pesquisa_versiculo_numero=0x7f060055;
+        public static final int tv_pesquisa_versiculo_texto=0x7f060056;
         public static final int tv_textos_licao=0x7f06004c;
         public static final int tv_textos_texto=0x7f06004d;
         public static final int up=0x7f060021;
         public static final int useLogo=0x7f060003;
-        public static final int versiculo_numero=0x7f060055;
-        public static final int versiculo_texto=0x7f060056;
+        public static final int versiculo_numero=0x7f060057;
+        public static final int versiculo_texto=0x7f060058;
         public static final int withText=0x7f06000c;
     }
     public static final class integer {
@@ -1188,17 +1187,19 @@ containing a value of this type.
         public static final int abc_search_view=0x7f030016;
         public static final int activity_biblia=0x7f030017;
         public static final int activity_dashboard=0x7f030018;
-        public static final int activity_pesquisa_biblia=0x7f030019;
-        public static final int activity_textos=0x7f03001a;
-        public static final int adapter_list_apostila=0x7f03001b;
-        public static final int fragment_biblia=0x7f03001c;
-        public static final int fragment_licao=0x7f03001d;
-        public static final int fragment_view_licao=0x7f03001e;
-        public static final int listvew_header=0x7f03001f;
-        public static final int listview_pesquisa_biblia=0x7f030020;
-        public static final int listview_versiculos=0x7f030021;
-        public static final int support_simple_spinner_dropdown_item=0x7f030022;
-        public static final int viewpager_apostila=0x7f030023;
+        public static final int activity_favorito_biblia=0x7f030019;
+        public static final int activity_pesquisa_biblia=0x7f03001a;
+        public static final int activity_textos=0x7f03001b;
+        public static final int adapter_list_apostila=0x7f03001c;
+        public static final int fragment_biblia=0x7f03001d;
+        public static final int fragment_licao=0x7f03001e;
+        public static final int fragment_view_licao=0x7f03001f;
+        public static final int listvew_header=0x7f030020;
+        public static final int listview_favorito_biblia=0x7f030021;
+        public static final int listview_pesquisa_biblia=0x7f030022;
+        public static final int listview_versiculos=0x7f030023;
+        public static final int support_simple_spinner_dropdown_item=0x7f030024;
+        public static final int viewpager_apostila=0x7f030025;
     }
     public static final class menu {
         public static final int biblia_menu=0x7f0e0000;
@@ -1282,10 +1283,11 @@ containing a value of this type.
         /**  Replace placeholder ID with your tracking ID 
          */
         public static final int ga_trackingId=0x7f0b000d;
-        public static final int justificativa_ar=0x7f0b0024;
+        public static final int justificativa_ar=0x7f0b0025;
         public static final int prefIdiomaPadrao=0x7f0b0022;
         public static final int prefTituloIdiomas=0x7f0b0021;
         public static final int search_hint=0x7f0b0023;
+        public static final int send_to=0x7f0b0024;
     }
     public static final class style {
         /** 

@@ -141,7 +141,10 @@ public class DBHelper extends SQLiteOpenHelper {
 				db.execSQL("INSERT INTO Apostila (numeroLicao,tituloApostila,tituloLicao,catequese,numeroApostila,idioma)  VALUES (5,'Meditação Semanal', 'Sexta', '<b>Didaquê</b><br/>Mt 7:1-12<br/><br /><b>Kerigma</b><br/>Jo 15:26; 16:15',5,'PT')");
 				db.execSQL("INSERT INTO Apostila (numeroLicao,tituloApostila,tituloLicao,catequese,numeroApostila,idioma)  VALUES (6,'Meditação Semanal', 'Sábado', '<b>Didaquê</b><br/>Mt 7:13-29<br/><br /><b>Kerigma</b><br/>Rm5:1-2, 10, 11; 6:4-6; 8:1-11; Gl 2:19-21; Cl 1:13-20',5,'PT')");
 				db.execSQL("INSERT INTO Apostila (numeroLicao,tituloApostila,tituloLicao,catequese,numeroApostila,idioma)  VALUES (7,'Meditação Semanal', 'Domingo', '1. O que Deus me falou nesta semana?<br /><br />2. Há algo para compartilhar ou confessar a outros?<br /><br />3. Qual o desafio para a próxima semana?',5,'PT')");
-			}
+			}else 
+				if(newVersion == 4){
+					db.execSQL("CREATE TABLE Favorito(_id INTEGER PRIMARY KEY, livro TEXT collate nocase, capitulo INTEGER, versiculo INTEGER, texto TEXT collate nocase)");
+				}
 //		copyDatabase();
 	}
 	

@@ -2,13 +2,12 @@ package br.com.jojun.didaque.activity;
 
 import java.util.List;
 
-import com.google.analytics.tracking.android.EasyTracker;
-
-import android.app.ListActivity;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -17,12 +16,18 @@ import br.com.jojun.didaque.R;
 import br.com.jojun.didaque.adapter.PesquisaAdapter;
 import br.com.jojun.didaque.bean.Biblia;
 
-public class SearchableActivity extends ListActivity{
+import com.google.analytics.tracking.android.EasyTracker;
+
+public class SearchableActivity extends ActionBarActivity{
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.activity_pesquisa_biblia);
-
+	    
+	    getSupportActionBar().setTitle("Pesquisa");
+	    getSupportActionBar().setHomeButtonEnabled(true);
+	    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+	    
 	    // Get the intent, verify the action and get the query
 	    Intent intent = getIntent();
 	    if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
@@ -65,6 +70,14 @@ public class SearchableActivity extends ListActivity{
 		
 		Log.i("SEARCH", query+" "+list.size());
 	}
-	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	        case android.R.id.home:
+	        	finish();
+	            return true;
+	    }
+	    return super.onOptionsItemSelected(item);
+	}
 	
 }

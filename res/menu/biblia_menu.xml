@@ -8,4 +8,9 @@
         android:icon="@drawable/ic_action_search"
         didaque:actionViewClass="android.support.v7.widget.SearchView"
         />
+    <!-- item
+        android:id="@+id/action_favarito"
+        android:icon="@drawable/ic_action_favorite"
+        android:title="@string/action_favorito"
+        didaque:showAsAction="collapseActionView"/-->    
 </menu>

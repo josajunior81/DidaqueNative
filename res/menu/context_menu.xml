@@ -1,11 +1,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:didaque="http://schemas.android.com/apk/res-auto" >
 
-    <item
+    <!-- item
         android:id="@+id/action_context_favarito"
         android:icon="@drawable/ic_action_favorite"
         android:title="@string/action_favorito"
-        didaque:showAsAction="always"/>
+        didaque:showAsAction="always"/-->
     <item
         android:id="@+id/action_context_copiar"
         android:icon="@drawable/ic_action_copy"
