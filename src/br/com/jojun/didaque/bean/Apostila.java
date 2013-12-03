@@ -18,7 +18,7 @@ public class Apostila {
 		Cursor cursor = db.query("Apostila ",
                 new String[] { "tituloLicao","catequese" }, "numeroLicao = "+numeroLicao+" AND numeroApostila = "+numeroApostila+" AND idioma = '"+DidaqueApplication.LANG+"'", null, null, null, null);
 		if(!cursor.moveToFirst())
-			return null;
+			return null; 
 		else {
 			Apostila a = new Apostila();
 			a.tituloLicao = cursor.getString(0);

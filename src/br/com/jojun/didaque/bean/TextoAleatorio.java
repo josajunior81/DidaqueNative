@@ -14,10 +14,13 @@ public class TextoAleatorio {
 		SQLiteDatabase db = DBHelper.getInstance().getReadableDatabase();
 		Cursor cursor = db.query("TextoAleatorio ",
                 new String[] { "licao","texto" }, " idioma = '"+DidaqueApplication.LANG+"' Order BY RANDOM() LIMIT 1", null, null, null, null);
-		cursor.moveToFirst();
-		TextoAleatorio ta = new TextoAleatorio();
-		ta.licao = cursor.getString(0);
-		ta.texto = cursor.getString(1);
-		return ta;
+		if(!cursor.moveToFirst())
+			return null;
+		else {
+			TextoAleatorio ta = new TextoAleatorio();
+			ta.licao = cursor.getString(0);
+			ta.texto = cursor.getString(1);
+			return ta;
+		}
 	}
 }
